@@ -1,10 +1,30 @@
 package com.gamepathics.Main;
 
-public class Main {
+import org.bukkit.plugin.java.JavaPlugin;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+public class Main extends JavaPlugin{
 
+	
+	static final String powerful_prefix = "[PowerfulOres]";
+	
+	@Override
+	public void onEnable() 
+	{
+
+		System.out.println(powerful_prefix + " Plugin Enabled");
+		super.onEnable();
 	}
+	
+	@Override
+	public void onDisable() 
+	{
+		System.out.println(powerful_prefix + " Plugin Disabled");
+
+		super.onDisable();
+	}
+
+
+
+
 
 }
