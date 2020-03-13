@@ -1,5 +1,6 @@
 package com.gamepathics.Ores;
 
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
@@ -15,30 +16,6 @@ public class FlightOre implements IOre {
 
 	@Override
 	public void setOreName(String name) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public String getOreLore() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOreLore(String lore) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Enchantment getEnchantment() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setEnchantment(Enchantment enchantment) {
 		// TODO Auto-generated method stub
 
 	}
@@ -65,6 +42,18 @@ public class FlightOre implements IOre {
 	public void setItemToDrop(ItemStack item) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Material getOreMaterial() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOreMaterial(Material material) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

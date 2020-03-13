@@ -11,15 +11,10 @@ public interface IOre {
 	public void setOreName(String name);
 	
 	
-	//Ore lore
-	public String getOreLore();
-	public void setOreLore(String lore);
-	
-	
-	//Ore enchantment
-	public Enchantment getEnchantment();
-	public void setEnchantment(Enchantment enchantment);
-	
+	//Ore material
+	public Material getOreMaterial();
+	public void setOreMaterial(Material material);
+		
 	
 	//Spawn probability
 	public int getSpawnProbability();
