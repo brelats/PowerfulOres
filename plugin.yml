@@ -1,0 +1,6 @@
+name: PowerfulOres
+version: 1.0
+main: com.gamepathics.Main.Main
+description: PowerfulOres
+author: Gamepathics
+api-version: 1.14
