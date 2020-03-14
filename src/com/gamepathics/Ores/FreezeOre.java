@@ -1,5 +1,6 @@
 package com.gamepathics.Ores;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -63,7 +64,19 @@ public class FreezeOre implements IOre {
 	}
 
 	@Override
-	public void setPermission() {
+	public void setPermission(String permision) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Location getLocation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setLocation(Location location) {
 		// TODO Auto-generated method stub
 		
 	}

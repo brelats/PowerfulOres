@@ -24,5 +24,20 @@ public class MessagesManager {
 	public static final String freezeStickName = "Freeze Stick";
 	public static final String freezeStickLore = "[RightClick] Feel the power of the Ice God!";
 
-
+	
+	//EnderOre
+	public static final String enderOreName = "Ender Ore";
+	
+	//FireOre
+	public static final String fireOreName = "Fire Ore";
+	
+	//FlightOre
+	public static final String flightOreName = "Flight Ore";
+	
+	//FrezeOre
+	public static final String freezeOreName = "Freeze Ore";
+	
+	//LightingOre
+	public static final String lightningOreName = "Freeze Ore";
+	
 }

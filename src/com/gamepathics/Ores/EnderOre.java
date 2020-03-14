@@ -1,13 +1,20 @@
 package com.gamepathics.Ores;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 import com.gamepathics.Interfaces.IOre;
 
 public class EnderOre implements IOre {
 
+	Material enderOreMaterial = Material.EMERALD_ORE;
+	
+	ItemStack enderOre = new ItemStack(enderOreMaterial, 1);
+	
+	Location enderOreLocation;
+	
+	
 	@Override
 	public String getOreName() {
 		// TODO Auto-generated method stub
@@ -47,13 +54,14 @@ public class EnderOre implements IOre {
 
 	@Override
 	public Material getOreMaterial() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return enderOreMaterial;
 	}
 
 	@Override
 	public void setOreMaterial(Material material) {
-		// TODO Auto-generated method stub
+
+		enderOreMaterial = material;
 		
 	}
 
@@ -64,9 +72,21 @@ public class EnderOre implements IOre {
 	}
 
 	@Override
-	public void setPermission() {
+	public void setPermission(String permision) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Location getLocation() {
+
+		return enderOreLocation;
+	}
+
+	@Override
+	public void setLocation(Location location) {
+		
+		enderOreLocation = location;		
 	}
 
 }

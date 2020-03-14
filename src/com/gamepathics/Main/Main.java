@@ -17,6 +17,8 @@ public class Main extends JavaPlugin{
 	{
 
 		this.getCommand(CommandsList.mainCommand).setExecutor((CommandExecutor) new CommandsManager());
+		this.getServer().getPluginManager().registerEvents(new EventsManager(), this);
+
 		
 		System.out.println(MessagesManager.powerfulOresPrefix + " Plugin Enabled");
 		super.onEnable();

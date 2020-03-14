@@ -20,6 +20,7 @@ public class CommandsManager implements CommandExecutor
 			if(cmd.getName().equalsIgnoreCase(CommandsList.mainCommand))
 			{
 				
+				player.sendMessage("Hello World");
 				return true;
 			}
 	

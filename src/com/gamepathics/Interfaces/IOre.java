@@ -1,5 +1,6 @@
 package com.gamepathics.Interfaces;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -24,4 +25,15 @@ public interface IOre {
 	//Item drop
 	public ItemStack getItemToDrop();
 	public void setItemToDrop(ItemStack item);
+	
+	
+	//Item permissions
+	public String getPermission();
+	public void setPermission(String permision);
+	
+	
+	//Ore Location
+	public Location getLocation();
+	public void setLocation(Location location);
+	
 }
