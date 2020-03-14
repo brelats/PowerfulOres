@@ -11,7 +11,6 @@ import com.gamepathics.Ores.EnderOre;
 public class CommandManager implements CommandExecutor
 {
 
-	EnderOre enderOre = new EnderOre();
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdString, String[] args) {
@@ -24,7 +23,7 @@ public class CommandManager implements CommandExecutor
 			if(cmd.getName().equalsIgnoreCase(CommandList.mainCommand))
 			{
 				
-				player.getInventory().addItem(enderOre.getOre());
+				
 				return true;
 			}
 	

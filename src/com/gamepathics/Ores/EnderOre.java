@@ -22,7 +22,7 @@ public class EnderOre implements IOre {
 	
 	
 	//Material
-	Material oreMaterial = Material.EMERALD_ORE;
+	public static Material oreMaterial = Material.EMERALD_ORE;
 	Material fragmentMaterial = Material.STICK;
 	
 	//ItemStack
