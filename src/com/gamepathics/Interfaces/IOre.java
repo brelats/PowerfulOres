@@ -7,6 +7,9 @@ import org.bukkit.inventory.ItemStack;
 
 public interface IOre {
 
+	public ItemStack getOre();
+	public void setOre(ItemStack ore);
+	
 	//Ore name
 	public String getOreName();
 	public void setOreName(String name);

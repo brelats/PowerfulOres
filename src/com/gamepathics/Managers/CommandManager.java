@@ -5,10 +5,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.gamepathics.Ores.EnderOre;
+
 //Gestor de comandos
-public class CommandsManager implements CommandExecutor
+public class CommandManager implements CommandExecutor
 {
 
+	EnderOre enderOre = new EnderOre();
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdString, String[] args) {
 		
@@ -17,10 +21,10 @@ public class CommandsManager implements CommandExecutor
 			
 			Player player = (Player) sender;
 			
-			if(cmd.getName().equalsIgnoreCase(CommandsList.mainCommand))
+			if(cmd.getName().equalsIgnoreCase(CommandList.mainCommand))
 			{
 				
-				player.sendMessage("Hello World");
+				player.getInventory().addItem(enderOre.getOre());
 				return true;
 			}
 	

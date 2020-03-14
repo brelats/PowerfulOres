@@ -81,4 +81,16 @@ public class LightningOre implements IOre{
 		
 	}
 
+	@Override
+	public ItemStack getOre() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOre(ItemStack ore) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

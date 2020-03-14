@@ -1,12 +1,13 @@
 package com.gamepathics.Main;
 
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.gamepathics.Managers.CommandsList;
-import com.gamepathics.Managers.CommandsManager;
-import com.gamepathics.Managers.EventsManager;
-import com.gamepathics.Managers.MessagesManager;
+import com.gamepathics.Managers.CommandList;
+import com.gamepathics.Managers.CommandManager;
+import com.gamepathics.Managers.EventManager;
+import com.gamepathics.Managers.MessageManager;
 
 
 public class Main extends JavaPlugin{
@@ -16,11 +17,11 @@ public class Main extends JavaPlugin{
 	public void onEnable() 
 	{
 
-		this.getCommand(CommandsList.mainCommand).setExecutor((CommandExecutor) new CommandsManager());
-		this.getServer().getPluginManager().registerEvents(new EventsManager(), this);
+		this.getCommand(CommandList.mainCommand).setExecutor((CommandExecutor) new CommandManager());
+		this.getServer().getPluginManager().registerEvents(new EventManager(), this);
 
 		
-		System.out.println(MessagesManager.powerfulOresPrefix + " Plugin Enabled");
+		System.out.println(MessageManager.powerfulOresPrefix + " Plugin Enabled");
 		super.onEnable();
 	}
 	
@@ -28,11 +29,9 @@ public class Main extends JavaPlugin{
 	public void onDisable() 
 	{
 		
-		System.out.println(MessagesManager.powerfulOresPrefix + " Plugin Disabled");
+		System.out.println(MessageManager.powerfulOresPrefix + " Plugin Disabled");
 		super.onDisable();
 	}
-
-
 
 
 

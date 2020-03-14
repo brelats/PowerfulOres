@@ -1,9 +1,13 @@
 package com.gamepathics.Managers;
 
-public class MessagesManager {
+public class MessageManager {
 
+	//Messages Prefix
 	public static final String powerfulOresPrefix = "[PowerfulOres] ";
 
+	
+	
+	
 	// LightningStick
 	public static final String lightningStickName = "Lightning Stick";
 	public static final String lightningStickLore = "[RightClick] Feel the power of the Lightning God!";
@@ -24,20 +28,36 @@ public class MessagesManager {
 	public static final String freezeStickName = "Freeze Stick";
 	public static final String freezeStickLore = "[RightClick] Feel the power of the Ice God!";
 
+
+	
 	
 	//EnderOre
 	public static final String enderOreName = "Ender Ore";
+		//EnderFragment
+		public static final String enderFragmentName = "Ender Fragment";
+		public static final String enderFragmentLore = "Use this to craft EnderStick";
 	
 	//FireOre
 	public static final String fireOreName = "Fire Ore";
+		//FireFragment
+		public static final String fireFragmentName = "Fire Fragment";
+		public static final String fireFragmentLore = "Use this to craft FireStick";
 	
 	//FlightOre
 	public static final String flightOreName = "Flight Ore";
+		//FlightFragment
+		public static final String flightFragmentName = "Flight Fragment";
+		public static final String flightFragmentLore = "Use this to craft FlightStick";
 	
 	//FrezeOre
 	public static final String freezeOreName = "Freeze Ore";
+		//FreezeFragment
+		public static final String freezeFragmentName = "Freeze Fragment";
+		public static final String freezeFragmentLore = "Use this to craft FreezeStick";
 	
-	//LightingOre
+	//LightningOre
 	public static final String lightningOreName = "Freeze Ore";
-	
+		//LightningFragment
+		public static final String lightningFragmentName = "Lightning Fragment";
+		public static final String lightningFragmentLore = "Use this to craft LightningStick";
 }

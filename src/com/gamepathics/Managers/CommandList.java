@@ -1,6 +1,6 @@
 package com.gamepathics.Managers;
 
-public class CommandsList 
+public class CommandList 
 {
 
 	public static final String mainCommand = "powerfulores";

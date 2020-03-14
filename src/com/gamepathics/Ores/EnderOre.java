@@ -1,30 +1,57 @@
 package com.gamepathics.Ores;
 
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gamepathics.Interfaces.IOre;
+import com.gamepathics.Managers.MessageManager;
 
 public class EnderOre implements IOre {
 
-	Material enderOreMaterial = Material.EMERALD_ORE;
 	
-	ItemStack enderOre = new ItemStack(enderOreMaterial, 1);
+	//String
+	String oreName = MessageManager.enderOreName;
+	String fragmentName = MessageManager.enderFragmentName;
+	String fragmentLore = MessageManager.enderFragmentLore;
 	
-	Location enderOreLocation;
 	
+	//Material
+	Material oreMaterial = Material.EMERALD_ORE;
+	Material fragmentMaterial = Material.STICK;
+	
+	//ItemStack
+	ItemStack ore = new ItemStack(oreMaterial, 1);
+	ItemStack fragment = new ItemStack(fragmentMaterial, 1);
+	
+	//ItemMeta
+	ItemMeta fragmentMeta = fragment.getItemMeta();
+	
+	//Location
+	Location oreLocation;
+	
+
+	public EnderOre()
+	{
+		fragmentMeta.setDisplayName(fragmentName);
+		fragmentMeta.setLore(Arrays.asList((fragmentLore)));
+		fragment.setItemMeta(fragmentMeta);
+	}
 	
 	@Override
 	public String getOreName() {
-		// TODO Auto-generated method stub
-		return null;
+		return oreName;
 	}
 
 	@Override
 	public void setOreName(String name) {
-		// TODO Auto-generated method stub
-
+		
+		oreName = name;
 	}
 
 
@@ -43,25 +70,25 @@ public class EnderOre implements IOre {
 	@Override
 	public ItemStack getItemToDrop() {
 		// TODO Auto-generated method stub
-		return null;
+		return fragment;
 	}
 
 	@Override
 	public void setItemToDrop(ItemStack item) {
 		// TODO Auto-generated method stub
-
+		fragment = item;
 	}
 
 	@Override
 	public Material getOreMaterial() {
 
-		return enderOreMaterial;
+		return oreMaterial;
 	}
 
 	@Override
 	public void setOreMaterial(Material material) {
 
-		enderOreMaterial = material;
+		oreMaterial = material;
 		
 	}
 
@@ -80,13 +107,26 @@ public class EnderOre implements IOre {
 	@Override
 	public Location getLocation() {
 
-		return enderOreLocation;
+		return oreLocation;
 	}
 
 	@Override
 	public void setLocation(Location location) {
 		
-		enderOreLocation = location;		
+		oreLocation = location;		
+	}
+
+	@Override
+	public ItemStack getOre() {
+		// TODO Auto-generated method stub
+
+		return ore;
+	}
+
+	@Override
+	public void setOre(ItemStack ore) {
+		this.ore = ore;
+		
 	}
 
 }
