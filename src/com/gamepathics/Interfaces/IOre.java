@@ -24,4 +24,11 @@ public interface IOre {
 	//Item drop
 	public ItemStack getItemToDrop();
 	public void setItemToDrop(ItemStack item);
+	
+	
+	//Item Permission
+	public String getPermission();
+	public void setPermission();
+	
+	
 }

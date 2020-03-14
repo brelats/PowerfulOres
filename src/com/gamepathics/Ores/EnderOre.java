@@ -57,4 +57,16 @@ public class EnderOre implements IOre {
 		
 	}
 
+	@Override
+	public String getPermission() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPermission() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
