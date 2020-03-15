@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 
 import com.gamepathics.Interfaces.IStick;
-import com.gamepathics.Managers.MessagesManager;
+import com.gamepathics.Managers.MessageManager;
 
 public class FireStick implements IStick{
 
@@ -15,8 +15,8 @@ public class FireStick implements IStick{
 	public ShapedRecipe stickRecipe = new ShapedRecipe(stickItem);
 	
 	
-	String stickName = MessagesManager.fireStickName;
-	String stickLore = MessagesManager.fireStickLore;
+	String stickName = MessageManager.fireStickName;
+	String stickLore = MessageManager.fireStickLore;
 	String permission = "";
 	Enchantment stickEnchantment = Enchantment.QUICK_CHARGE;
 	
@@ -84,6 +84,18 @@ public class FireStick implements IStick{
 	@Override
 	public ShapedRecipe recipe() {
 		
+		return null;
+	}
+
+	@Override
+	public ItemStack getStick() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ItemStack setStick() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

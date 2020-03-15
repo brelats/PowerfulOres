@@ -3,6 +3,7 @@ package com.gamepathics.Sticks;
 import java.util.ArrayList;
 
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -10,17 +11,23 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gamepathics.Interfaces.IStick;
-import com.gamepathics.Managers.MessagesManager;
+import com.gamepathics.Main.Main;
+import com.gamepathics.Managers.MessageManager;
+import com.gamepathics.Ores.LightningOre;
 
 public class LightningStick implements IStick{
 	
+	Main plugin;
+	
 	public ItemStack stickItem = new ItemStack(Material.STICK);
-	public ShapedRecipe stickRecipe = new ShapedRecipe(stickItem);
+	
+	NamespacedKey key = new NamespacedKey(plugin, plugin.getDescription().getName());
+	public ShapedRecipe stickRecipe = new ShapedRecipe(key ,stickItem);
 	
 	ItemMeta stickMeta = stickItem.getItemMeta();
 	
-	String stickName = MessagesManager.lightningStickName;
-	String stickLore = MessagesManager.lightningStickLore;
+	String stickName = MessageManager.lightningStickName;
+	String stickLore = MessageManager.lightningStickLore;
 	String permission = "";
 	Enchantment stickEnchantment = Enchantment.QUICK_CHARGE;
 	
@@ -97,7 +104,9 @@ public class LightningStick implements IStick{
 
 	@Override
 	public ShapedRecipe recipe() {
-		
+	
+		stickRecipe.shape("IYY", "YIY", "YYI");
+		stickRecipe.setIngredient('I', LightningOre.fragmentMaterial);
 		return null;
 	}
 

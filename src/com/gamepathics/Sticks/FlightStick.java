@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 
 import com.gamepathics.Interfaces.IStick;
-import com.gamepathics.Managers.MessagesManager;
+import com.gamepathics.Managers.MessageManager;
 
 public class FlightStick implements IStick{
 
@@ -15,8 +15,8 @@ public class FlightStick implements IStick{
 	public ShapedRecipe stickRecipe = new ShapedRecipe(stickItem);
 	
 	
-	String stickName = MessagesManager.flightStickName;
-	String stickLore = MessagesManager.flightStickLore;
+	String stickName = MessageManager.flightStickName;
+	String stickLore = MessageManager.flightStickLore;
 	String permission = "";
 	Enchantment stickEnchantment = Enchantment.QUICK_CHARGE;
 	
@@ -84,6 +84,18 @@ public class FlightStick implements IStick{
 	@Override
 	public ShapedRecipe recipe() {
 		
+		return null;
+	}
+
+	@Override
+	public ItemStack getStick() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ItemStack setStick() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }
