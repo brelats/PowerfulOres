@@ -20,7 +20,7 @@ public class FreezeOre implements IOre {
 
 	// Material
 	public static Material oreMaterial = Material.LAPIS_ORE;
-	Material fragmentMaterial = Material.STICK;
+	public static Material fragmentMaterial = Material.STICK;
 
 	// ItemStack
 	ItemStack ore = new ItemStack(oreMaterial, 1);

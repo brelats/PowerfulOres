@@ -22,7 +22,7 @@ public class FireOre implements IOre {
 	
 	//Material
 	public static Material oreMaterial = Material.REDSTONE_ORE;
-	Material fragmentMaterial = Material.STICK;
+	public static Material fragmentMaterial = Material.STICK;
 	
 	//ItemStack
 	ItemStack ore = new ItemStack(oreMaterial, 1);
