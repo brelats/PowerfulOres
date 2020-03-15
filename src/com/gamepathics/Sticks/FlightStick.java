@@ -1,46 +1,60 @@
 package com.gamepathics.Sticks;
 
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
 
 import com.gamepathics.Interfaces.IStick;
+import com.gamepathics.Managers.MessagesManager;
 
 public class FlightStick implements IStick{
 
+	public ItemStack stickItem = new ItemStack(Material.STICK);
+	public ShapedRecipe stickRecipe = new ShapedRecipe(stickItem);
+	
+	
+	String stickName = MessagesManager.flightStickName;
+	String stickLore = MessagesManager.flightStickLore;
+	String permission = "";
+	Enchantment stickEnchantment = Enchantment.QUICK_CHARGE;
+	
+	
 	@Override
 	public String getStickName() {
 		// TODO Auto-generated method stub
-		return null;
+		return stickName;
 	}
 
 	@Override
 	public void setStickName(String name) {
 		// TODO Auto-generated method stub
-		
+		stickName = name; 
 	}
 
 	@Override
 	public String getStickLore() {
 		// TODO Auto-generated method stub
-		return null;
+		return stickLore;
 	}
 
 	@Override
-	public void setStickLore(String Lore) {
+	public void setStickLore(String lore) {
 		// TODO Auto-generated method stub
-		
+		stickLore = lore;
 	}
 
 	@Override
 	public Enchantment getEnchantment() {
 		// TODO Auto-generated method stub
-		return null;
+		return stickEnchantment;
 	}
 
 	@Override
 	public void setEnchantment(Enchantment enchantment) {
 		// TODO Auto-generated method stub
-		
+		stickEnchantment = enchantment;
 	}
 
 	@Override
@@ -67,4 +81,9 @@ public class FlightStick implements IStick{
 		
 	}
 
+	@Override
+	public ShapedRecipe recipe() {
+		
+		return null;
+	}
 }

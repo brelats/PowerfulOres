@@ -2,6 +2,8 @@ package com.gamepathics.Interfaces;
 
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
 
 public interface IStick {
 	
@@ -35,5 +37,10 @@ public interface IStick {
 	
 	public void setPlayer(Player pl);
 
+	
+	public ShapedRecipe recipe();
+	
+	public ItemStack getStick();
+	public ItemStack setStick();
 
 }
