@@ -10,6 +10,7 @@ import com.gamepathics.Managers.CommandList;
 import com.gamepathics.Managers.CommandManager;
 import com.gamepathics.Managers.EventManager;
 import com.gamepathics.Managers.MessageManager;
+import com.gamepathics.Managers.WorldManager;
 
 
 public class Main extends JavaPlugin{
@@ -21,8 +22,12 @@ public class Main extends JavaPlugin{
 
 		this.getCommand(CommandList.mainCommand).setExecutor((CommandExecutor) new CommandManager());
 		this.getServer().getPluginManager().registerEvents(new EventManager(), this);
-
-		//generateOres(1, 120);
+		this.getServer().getPluginManager().registerEvents(new WorldManager(), this);
+		
+		
+		//1800 s = 30 min
+		//36000 ticks = 1800 * 20
+		generateOres(36000, 36000);  
 		
 		System.out.println(MessageManager.powerfulOresPrefix + " Plugin Enabled");
 		super.onEnable();
@@ -44,7 +49,7 @@ public class Main extends JavaPlugin{
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			@Override
 			public void run() {
-				EventManager.generateOre(Bukkit.getWorlds().get(0));
+				WorldManager.generateOre(Bukkit.getWorlds().get(0));
 			}
 			
 		}, timeFromStart, time);
