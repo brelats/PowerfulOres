@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 
 import com.gamepathics.Interfaces.IStick;
 import com.gamepathics.Main.Main;
@@ -17,12 +18,11 @@ import com.gamepathics.Ores.LightningOre;
 
 public class LightningStick implements IStick{
 	
-	Main plugin;
-	
+	Plugin plugin = Main.getPlugin(Main.class);	
 	public ItemStack stickItem = new ItemStack(Material.STICK);
 	
-	NamespacedKey key = new NamespacedKey(plugin, plugin.getDescription().getName());
-	public ShapedRecipe stickRecipe = new ShapedRecipe(key ,stickItem);
+	
+	public ShapedRecipe stickRecipe;
 	
 	ItemMeta stickMeta = stickItem.getItemMeta();
 	
@@ -40,6 +40,8 @@ public class LightningStick implements IStick{
 		stickMeta.setDisplayName(stickName);
 		stickMeta.setLore(loreList);
 		stickItem.setItemMeta(stickMeta);
+		stickRecipe = new ShapedRecipe(stickItem);
+		recipe();
 	}
 
 	@Override
@@ -105,9 +107,11 @@ public class LightningStick implements IStick{
 	@Override
 	public ShapedRecipe recipe() {
 	
-		stickRecipe.shape("IYY", "YIY", "YYI");
+		stickRecipe.shape("YYI", "YIY", "IYY");
 		stickRecipe.setIngredient('I', LightningOre.fragmentMaterial);
-		return null;
+		plugin.getServer().addRecipe(stickRecipe);
+
+		return stickRecipe;
 	}
 
 	@Override

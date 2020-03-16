@@ -1,24 +1,49 @@
 package com.gamepathics.Sticks;
 
+import java.util.ArrayList;
+
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 
 import com.gamepathics.Interfaces.IStick;
+import com.gamepathics.Main.Main;
 import com.gamepathics.Managers.MessageManager;
+import com.gamepathics.Ores.FlightOre;
+import com.gamepathics.Ores.LightningOre;
 
 public class FlightStick implements IStick{
 
+	Plugin plugin = Main.getPlugin(Main.class);
+	
 	public ItemStack stickItem = new ItemStack(Material.STICK);
+	
 	public ShapedRecipe stickRecipe = new ShapedRecipe(stickItem);
+	
+	ItemMeta stickMeta = stickItem.getItemMeta();
 	
 	
 	String stickName = MessageManager.flightStickName;
 	String stickLore = MessageManager.flightStickLore;
 	String permission = "";
 	Enchantment stickEnchantment = Enchantment.QUICK_CHARGE;
+	
+	
+	public FlightStick() {
+		
+		ArrayList<String> loreList = new ArrayList<String>();
+		loreList.add(stickLore);
+		
+		stickMeta.setDisplayName(stickName);
+		stickMeta.setLore(loreList);
+		stickItem.setItemMeta(stickMeta);
+		recipe();
+	}
 	
 	
 	@Override
@@ -84,7 +109,11 @@ public class FlightStick implements IStick{
 	@Override
 	public ShapedRecipe recipe() {
 		
-		return null;
+		stickRecipe.shape("YYI", "YIY", "IYY");
+		stickRecipe.setIngredient('I', FlightOre.fragmentMaterial);	
+		plugin.getServer().addRecipe(stickRecipe);
+		
+		return stickRecipe;
 	}
 
 	@Override
