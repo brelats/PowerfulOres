@@ -19,6 +19,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.plugin.Plugin;
 
 import com.gamepathics.Interfaces.IOre;
@@ -71,6 +72,44 @@ public class WorldManager implements Listener {
 			}
 		}
 
+	}
+	
+	@EventHandler
+	public void OnPlaceBlock(BlockPlaceEvent e)
+	{
+		if(e.getItemInHand().hasItemMeta())
+		{
+			for (IOre ore : allOres) {
+				if(e.getItemInHand().getItemMeta().getDisplayName().equals(ore.getOreName()))
+				{
+					IOre newOre = null;
+					
+					switch (ore.getOreName()) {
+					case MessageManager.enderOreName:
+						newOre = new EnderOre();
+						break;
+					case MessageManager.flightOreName:
+						newOre = new FlightOre();
+						break;
+					case MessageManager.freezeOreName:
+						newOre = new FreezeOre();
+						break;	
+					case MessageManager.fireOreName:
+						newOre = new FireOre();
+						break;
+					case MessageManager.lightningOreName:
+						newOre = new LightningOre();
+						break;
+					}
+					
+					newOre.setLocation(e.getBlockPlaced().getLocation());
+
+					oresGenerated.add(newOre);
+					saveOres();
+				}
+			}
+		}
+		
 	}
 
 	public static void generateOre(World w) {

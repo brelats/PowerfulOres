@@ -5,7 +5,12 @@ public class MessageManager {
 	//Messages Prefix
 	public static final String powerfulOresPrefix = "[PowerfulOres] ";
 
+	//Ore Gived
+	public static final String oreGived = " gived to ";
 	
+	//Errors
+	public static final String oreDoesNotExist = "This ore does not exist";
+	public static String commandNotFound = "Please use /(powerfulores | po) give (ore | stick) (ore type | stick type)";
 	
 	
 	// LightningStick
@@ -56,7 +61,7 @@ public class MessageManager {
 		public static final String freezeFragmentLore = "Use this to craft FreezeStick";
 	
 	//LightningOre
-	public static final String lightningOreName = "Freeze Ore";
+	public static final String lightningOreName = "Lightning Ore";
 		//LightningFragment
 		public static final String lightningFragmentName = "Lightning Fragment";
 		public static final String lightningFragmentLore = "Use this to craft LightningStick";

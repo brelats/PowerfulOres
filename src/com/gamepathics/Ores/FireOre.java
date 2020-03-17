@@ -29,6 +29,7 @@ public class FireOre implements IOre {
 	ItemStack fragment = new ItemStack(fragmentMaterial, 1);
 	
 	//ItemMeta
+	ItemMeta oreMeta = ore.getItemMeta();
 	ItemMeta fragmentMeta = fragment.getItemMeta();
 	
 	//Location
@@ -37,6 +38,9 @@ public class FireOre implements IOre {
 
 	public FireOre()
 	{
+		oreMeta.setDisplayName(oreName);
+		ore.setItemMeta(oreMeta);
+		
 		fragmentMeta.setDisplayName(fragmentName);
 		fragmentMeta.setLore(Arrays.asList((fragmentLore)));
 		fragment.setItemMeta(fragmentMeta);
