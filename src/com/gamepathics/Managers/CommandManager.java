@@ -3,6 +3,7 @@ package com.gamepathics.Managers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -40,7 +41,22 @@ public class CommandManager implements CommandExecutor
 							{
 								if (args.length > 2) 
 								{
-									giveOre(args, player);
+									if (args.length > 3) 
+									{
+										if(Bukkit.getServer().getPlayer(args[3]) != null)
+										{
+											Player otherPlayer = Bukkit.getServer().getPlayer(args[3]);
+											giveOre(args, player, otherPlayer);
+											return true;
+										}
+										else 
+										{
+											playerNotFound(player);
+											return true;
+										}
+										
+									}
+									giveOre(args, player, player);
 									return true;
 								}
 								else 
@@ -62,7 +78,10 @@ public class CommandManager implements CommandExecutor
 							commandNotFound(player);
 							return true;
 						}
-					} 
+					}else if(args[0].equalsIgnoreCase(CommandList.helpCommand)) 
+					{
+						helpCommand(player);
+					}
 					else 
 					{
 						commandNotFound(player);
@@ -70,7 +89,12 @@ public class CommandManager implements CommandExecutor
 					}
 
 				}
-
+				else 
+				{
+					helpCommand(player);
+					return true;
+				}
+				
 				return true;
 			}
 
@@ -79,7 +103,7 @@ public class CommandManager implements CommandExecutor
 		return true;
 	}
 
-	public boolean giveOre(String[] args, Player player) 
+	public boolean giveOre(String[] args, Player player, Player otherPlayer) 
 	{
 		switch (args[2].toLowerCase()) 
 		{
@@ -87,44 +111,44 @@ public class CommandManager implements CommandExecutor
 		case CommandList.enderOre:
 
 			EnderOre o = new EnderOre();
-			player.getInventory().addItem(o.getOre());
+			otherPlayer.getInventory().addItem(o.getOre());
 			player.sendMessage(
-					MessageManager.powerfulOresPrefix + o.getOreName() + MessageManager.oreGived + player.getName());
+					MessageManager.powerfulOresPrefix + o.getOreName() + MessageManager.oreGived + otherPlayer.getName());
 			return true;
 
 		case CommandList.freezeOre:
 
 			FreezeOre f = new FreezeOre();
-			player.getInventory().addItem(f.getOre());
+			otherPlayer.getInventory().addItem(f.getOre());
 			player.sendMessage(
-					MessageManager.powerfulOresPrefix + f.getOreName() + MessageManager.oreGived + player.getName());
+					MessageManager.powerfulOresPrefix + f.getOreName() + MessageManager.oreGived + otherPlayer.getName());
 
 			return true;
 
 		case CommandList.flightOre:
 
 			FlightOre fl = new FlightOre();
-			player.getInventory().addItem(fl.getOre());
+			otherPlayer.getInventory().addItem(fl.getOre());
 			player.sendMessage(
-					MessageManager.powerfulOresPrefix + fl.getOreName() + MessageManager.oreGived + player.getName());
+					MessageManager.powerfulOresPrefix + fl.getOreName() + MessageManager.oreGived + otherPlayer.getName());
 
 			return true;
 
 		case CommandList.fireOre:
 
 			FireOre fi = new FireOre();
-			player.getInventory().addItem(fi.getOre());
+			otherPlayer.getInventory().addItem(fi.getOre());
 			player.sendMessage(
-					MessageManager.powerfulOresPrefix + fi.getOreName() + MessageManager.oreGived + player.getName());
+					MessageManager.powerfulOresPrefix + fi.getOreName() + MessageManager.oreGived + otherPlayer.getName());
 
 			return true;
 
 		case CommandList.lightningOre:
 
 			LightningOre l = new LightningOre();
-			player.getInventory().addItem(l.getOre());
+			otherPlayer.getInventory().addItem(l.getOre());
 			player.sendMessage(
-					MessageManager.powerfulOresPrefix + l.getOreName() + MessageManager.oreGived + player.getName());
+					MessageManager.powerfulOresPrefix + l.getOreName() + MessageManager.oreGived + otherPlayer.getName());
 
 			return true;
 		}
@@ -136,6 +160,17 @@ public class CommandManager implements CommandExecutor
 	public void commandNotFound(Player player) 
 	{
 		player.sendMessage(MessageManager.powerfulOresPrefix + MessageManager.commandNotFound);
+	}
+	
+	public void helpCommand(Player player)
+	{
+		player.sendMessage(MessageManager.helpCommand);
+	}
+	
+	public void playerNotFound(Player player)
+	{
+		player.sendMessage(MessageManager.powerfulOresPrefix + MessageManager.playerNotFound);
+
 	}
 
 }

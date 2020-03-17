@@ -11,6 +11,8 @@ public class CommandList
 	
 	public static final String stickCommand = "stick";
 	
+	public static final String helpCommand = "help";
+	
 	//STICKS
 	public static final String lightningStick = "LightningStick";
 
