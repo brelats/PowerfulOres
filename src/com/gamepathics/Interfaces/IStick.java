@@ -28,17 +28,9 @@ public interface IStick {
 	public String getPermission();
 	public void setPermission(String Permission);
 	
-	
-	
-	//Stick Hability
-	public void Hability();
 
-
-	
 	public void setPlayer(Player pl);
 
-	
-	public ShapedRecipe recipe();
 	
 	public ItemStack getStick();
 	public ItemStack setStick();

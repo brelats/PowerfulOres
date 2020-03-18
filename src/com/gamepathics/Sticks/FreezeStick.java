@@ -23,15 +23,12 @@ public class FreezeStick implements IStick {
 
 	public ItemStack stickItem = new ItemStack(Material.STICK);
 
-
-	public ShapedRecipe stickRecipe = new ShapedRecipe(stickItem);
-
 	ItemMeta stickMeta = stickItem.getItemMeta();
 
 	String stickName = MessageManager.freezeStickName;
 	String stickLore = MessageManager.freezeStickLore;
 	String permission = "";
-	Enchantment stickEnchantment = Enchantment.QUICK_CHARGE;
+	Enchantment stickEnchantment;
 
 	
 	public FreezeStick() {
@@ -42,7 +39,7 @@ public class FreezeStick implements IStick {
 		stickMeta.setDisplayName(stickName);
 		stickMeta.setLore(loreList);
 		stickItem.setItemMeta(stickMeta);
-		recipe();
+		stickMeta.addEnchant(Main.stickEnchantment, 1, true);
 	}
 	
 	@Override
@@ -93,11 +90,6 @@ public class FreezeStick implements IStick {
 
 	}
 
-	@Override
-	public void Hability() {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void setPlayer(Player pl) {
@@ -105,14 +97,6 @@ public class FreezeStick implements IStick {
 
 	}
 
-	@Override
-	public ShapedRecipe recipe() {
-		stickRecipe.shape("YYI", "YIY", "IYY");
-		stickRecipe.setIngredient('I', FreezeOre.fragmentMaterial);
-		plugin.getServer().addRecipe(stickRecipe);
-
-		return stickRecipe;
-	}
 
 	@Override
 	public ItemStack getStick() {

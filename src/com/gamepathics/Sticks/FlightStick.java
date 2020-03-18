@@ -19,11 +19,11 @@ import com.gamepathics.Ores.LightningOre;
 
 public class FlightStick implements IStick{
 
-	Plugin plugin = Main.getPlugin(Main.class);
+	static Plugin plugin = Main.getPlugin(Main.class);
 	
 	public ItemStack stickItem = new ItemStack(Material.STICK);
 	
-	public ShapedRecipe stickRecipe = new ShapedRecipe(stickItem);
+
 	
 	ItemMeta stickMeta = stickItem.getItemMeta();
 	
@@ -31,7 +31,7 @@ public class FlightStick implements IStick{
 	String stickName = MessageManager.flightStickName;
 	String stickLore = MessageManager.flightStickLore;
 	String permission = "";
-	Enchantment stickEnchantment = Enchantment.QUICK_CHARGE;
+	Enchantment stickEnchantment;
 	
 	
 	public FlightStick() {
@@ -42,8 +42,7 @@ public class FlightStick implements IStick{
 		stickMeta.setDisplayName(stickName);
 		stickMeta.setLore(loreList);
 		stickItem.setItemMeta(stickMeta);
-		recipe();
-	}
+		stickMeta.addEnchant(Main.stickEnchantment, 1, true);	}
 	
 	
 	@Override
@@ -95,25 +94,9 @@ public class FlightStick implements IStick{
 	}
 
 	@Override
-	public void Hability() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void setPlayer(Player pl) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public ShapedRecipe recipe() {
-		
-		stickRecipe.shape("YYI", "YIY", "IYY");
-		stickRecipe.setIngredient('I', FlightOre.fragmentMaterial);	
-		plugin.getServer().addRecipe(stickRecipe);
-		
-		return stickRecipe;
 	}
 
 	@Override

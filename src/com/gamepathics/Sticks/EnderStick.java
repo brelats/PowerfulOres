@@ -19,30 +19,29 @@ import com.gamepathics.Ores.LightningOre;
 
 public class EnderStick implements IStick {
 
-	Plugin plugin = Main.getPlugin(Main.class);
+	static Plugin plugin = Main.getPlugin(Main.class);
 
 	public ItemStack stickItem = new ItemStack(Material.STICK);
-
-	public ShapedRecipe stickRecipe = new ShapedRecipe(stickItem);
 
 	ItemMeta stickMeta = stickItem.getItemMeta();
 
 	String stickName = MessageManager.enderStickName;
 	String stickLore = MessageManager.enderStickLore;
 	String permission = "";
-	Enchantment stickEnchantment = Enchantment.QUICK_CHARGE;
-
+	Enchantment stickEnchantment;
 	
 	
 	public EnderStick() {
 		
 		ArrayList<String> loreList = new ArrayList<String>();
 		loreList.add(stickLore);
-		
+			
 		stickMeta.setDisplayName(stickName);
 		stickMeta.setLore(loreList);
+		stickMeta.addEnchant(Main.stickEnchantment, 1, true);
+
 		stickItem.setItemMeta(stickMeta);
-		recipe();
+
 	}
 	
 	@Override
@@ -74,6 +73,8 @@ public class EnderStick implements IStick {
 		// TODO Auto-generated method stub
 		return stickEnchantment;
 	}
+	
+	
 
 	@Override
 	public void setEnchantment(Enchantment enchantment) {
@@ -93,11 +94,6 @@ public class EnderStick implements IStick {
 
 	}
 
-	@Override
-	public void Hability() {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void setPlayer(Player pl) {
@@ -105,15 +101,6 @@ public class EnderStick implements IStick {
 
 	}
 
-	@Override
-	public ShapedRecipe recipe() {
-
-		stickRecipe.shape("YYI", "YIY", "IYY");
-		stickRecipe.setIngredient('I', EnderOre.fragmentMaterial);
-		plugin.getServer().addRecipe(stickRecipe);
-
-		return stickRecipe;
-	}
 
 	@Override
 	public ItemStack getStick() {

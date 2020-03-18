@@ -22,14 +22,12 @@ public class LightningStick implements IStick{
 	public ItemStack stickItem = new ItemStack(Material.STICK);
 	
 	
-	public ShapedRecipe stickRecipe;
-	
 	ItemMeta stickMeta = stickItem.getItemMeta();
 	
 	String stickName = MessageManager.lightningStickName;
 	String stickLore = MessageManager.lightningStickLore;
 	String permission = "";
-	Enchantment stickEnchantment = Enchantment.QUICK_CHARGE;
+	Enchantment stickEnchantment;
 	
 	
 	public LightningStick() {
@@ -40,8 +38,8 @@ public class LightningStick implements IStick{
 		stickMeta.setDisplayName(stickName);
 		stickMeta.setLore(loreList);
 		stickItem.setItemMeta(stickMeta);
-		stickRecipe = new ShapedRecipe(stickItem);
-		recipe();
+		stickMeta.addEnchant(Main.stickEnchantment, 1, true);
+		
 	}
 
 	@Override
@@ -92,11 +90,6 @@ public class LightningStick implements IStick{
 		
 	}
 
-	@Override
-	public void Hability() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void setPlayer(Player pl) {
@@ -104,15 +97,6 @@ public class LightningStick implements IStick{
 		
 	}
 
-	@Override
-	public ShapedRecipe recipe() {
-	
-		stickRecipe.shape("YYI", "YIY", "IYY");
-		stickRecipe.setIngredient('I', LightningOre.fragmentMaterial);
-		plugin.getServer().addRecipe(stickRecipe);
-
-		return stickRecipe;
-	}
 
 	@Override
 	public ItemStack getStick() {

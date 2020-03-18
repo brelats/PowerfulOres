@@ -23,7 +23,6 @@ public class FireStick implements IStick{
 	
 	public ItemStack stickItem = new ItemStack(Material.STICK);
 	
-	public ShapedRecipe stickRecipe = new ShapedRecipe(stickItem);
 	
 	ItemMeta stickMeta = stickItem.getItemMeta();
 	
@@ -31,18 +30,18 @@ public class FireStick implements IStick{
 	String stickName = MessageManager.fireStickName;
 	String stickLore = MessageManager.fireStickLore;
 	String permission = "";
-	Enchantment stickEnchantment = Enchantment.QUICK_CHARGE;
+	Enchantment stickEnchantment;
 	
 	
 	public FireStick() {
 		
 		ArrayList<String> loreList = new ArrayList<String>();
 		loreList.add(stickLore);
-		
+		stickMeta.addEnchant(Main.stickEnchantment, 1, true);
 		stickMeta.setDisplayName(stickName);
 		stickMeta.setLore(loreList);
 		stickItem.setItemMeta(stickMeta);
-		recipe();
+
 	}
 	
 	@Override
@@ -94,25 +93,9 @@ public class FireStick implements IStick{
 	}
 
 	@Override
-	public void Hability() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void setPlayer(Player pl) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public ShapedRecipe recipe() {
-		
-		stickRecipe.shape("YYI", "YIY", "IYY");
-		stickRecipe.setIngredient('I', FireOre.fragmentMaterial);
-		plugin.getServer().addRecipe(stickRecipe);
-
-		return stickRecipe;
 	}
 
 	@Override
