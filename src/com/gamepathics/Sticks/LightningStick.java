@@ -34,11 +34,11 @@ public class LightningStick implements IStick{
 		
 		ArrayList<String> loreList = new ArrayList<String>();
 		loreList.add(stickLore);
-		
+		stickItem.setDurability((short) 100);
 		stickMeta.setDisplayName(stickName);
 		stickMeta.setLore(loreList);
-		stickItem.setItemMeta(stickMeta);
 		stickMeta.addEnchant(Main.stickEnchantment, 1, true);
+		stickItem.setItemMeta(stickMeta);
 		
 	}
 

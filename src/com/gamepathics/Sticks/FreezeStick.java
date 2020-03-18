@@ -13,6 +13,7 @@ import org.bukkit.plugin.Plugin;
 
 import com.gamepathics.Interfaces.IStick;
 import com.gamepathics.Main.Main;
+import com.gamepathics.Managers.EventManager;
 import com.gamepathics.Managers.MessageManager;
 import com.gamepathics.Ores.FreezeOre;
 import com.gamepathics.Ores.LightningOre;
@@ -29,17 +30,17 @@ public class FreezeStick implements IStick {
 	String stickLore = MessageManager.freezeStickLore;
 	String permission = "";
 	Enchantment stickEnchantment;
-
+	public boolean canFreeze = false;
 	
 	public FreezeStick() {
-		
+	
 		ArrayList<String> loreList = new ArrayList<String>();
 		loreList.add(stickLore);
-		
 		stickMeta.setDisplayName(stickName);
 		stickMeta.setLore(loreList);
-		stickItem.setItemMeta(stickMeta);
 		stickMeta.addEnchant(Main.stickEnchantment, 1, true);
+		stickItem.setDurability((short)100);
+		stickItem.setItemMeta(stickMeta);
 	}
 	
 	@Override

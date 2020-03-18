@@ -38,11 +38,12 @@ public class FlightStick implements IStick{
 		
 		ArrayList<String> loreList = new ArrayList<String>();
 		loreList.add(stickLore);
-		
+		stickItem.setDurability((short)100);
 		stickMeta.setDisplayName(stickName);
 		stickMeta.setLore(loreList);
+		stickMeta.addEnchant(Main.stickEnchantment, 1, true);	
 		stickItem.setItemMeta(stickMeta);
-		stickMeta.addEnchant(Main.stickEnchantment, 1, true);	}
+		}
 	
 	
 	@Override

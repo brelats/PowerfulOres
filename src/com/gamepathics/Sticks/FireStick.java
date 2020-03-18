@@ -37,6 +37,7 @@ public class FireStick implements IStick{
 		
 		ArrayList<String> loreList = new ArrayList<String>();
 		loreList.add(stickLore);
+		stickItem.setDurability((short)100);
 		stickMeta.addEnchant(Main.stickEnchantment, 1, true);
 		stickMeta.setDisplayName(stickName);
 		stickMeta.setLore(loreList);

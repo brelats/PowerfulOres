@@ -2,6 +2,7 @@ package com.gamepathics.Managers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -30,6 +31,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.gamepathics.Interfaces.IOre;
 import com.gamepathics.Interfaces.IStick;
+import com.gamepathics.Main.Main;
 import com.gamepathics.Ores.EnderOre;
 import com.gamepathics.Ores.LightningOre;
 import com.gamepathics.Sticks.EnderStick;
@@ -40,11 +42,12 @@ import com.gamepathics.Sticks.LightningStick;
 
 public class EventManager implements Listener {
 
+	Main plugin = Main.getPlugin(Main.class);
 	Player pl;
 	static ArrayList<IOre> ores = new ArrayList<IOre>();
 	static ArrayList<IStick> sticks = new ArrayList<IStick>();
-	static boolean canFreeze = false;
-
+	static HashMap<Player, FreezeStick> freezeSticks = new HashMap<Player, FreezeStick>();
+	
 	public EventManager() {
 		sticks.add(new LightningStick());
 		sticks.add(new FreezeStick());
@@ -61,25 +64,28 @@ public class EventManager implements Listener {
 		  {
 			  if(player.getItemInHand().getItemMeta().getDisplayName().equals(MessageManager.freezeStickName))
 			  {
-				if(canFreeze)
+				  if(freezeSticks.get(player) != null) 
+				  {
+				if(freezeSticks.get(player).canFreeze)
 				{
-					
-					
-					for(int i = 0; i < 3; ++i) 
+				
+					for(int i = 0; i < 6; ++i) 
 					{
-						for(int j = 0; j < 3; ++j)
+						for(int j = 0; j < 6; ++j)
 						{
 							player.getWorld().getBlockAt(
 									new Location(player.getWorld(),
-											player.getLocation().getX() + i - 1,
+											player.getLocation().getX() + i - 3,
 											player.getLocation().getBlockY() - 1,
-											player.getLocation().getZ() + j - 1)).setType(Material.ICE);
+											player.getLocation().getZ() + j - 3)).setType(Material.ICE);
 						}
 					}
-					
-					
-				}
+
+				}else {
+					  freezeSticks.get(player).canFreeze = false;
+				  }
 				  
+			  }
 			  }
 		  }
 
@@ -87,18 +93,19 @@ public class EventManager implements Listener {
 	 
 
 	@EventHandler
-	public void onPlayerEvents(PlayerInteractEvent x){
+	public void onPlayerInteracts(PlayerInteractEvent x){
 		pl = x.getPlayer();
 		Location eye = pl.getEyeLocation();
 		Location loc = eye.add(eye.getDirection().multiply(1.2));
 
-		if (x.getAction().equals(Action.RIGHT_CLICK_AIR)) 
+		if (x.getAction().equals(Action.RIGHT_CLICK_AIR) || x.getAction().equals(Action.RIGHT_CLICK_BLOCK)) 
 		{
 			if(pl.getItemInHand().hasItemMeta()) {
 			if (pl.getItemInHand().getItemMeta().getDisplayName().equals(MessageManager.lightningStickName)) 
 			{
 				pl.getWorld().strikeLightning(pl.getTargetBlock((Set<Material>)null, 25).getLocation());
-				
+				pl.getItemInHand().setDurability((short)(pl.getItemInHand().getDurability() - 1));
+			
 			}
 			else if (pl.getItemInHand().getItemMeta().getDisplayName().equals(MessageManager.fireStickName)) 
 			{
@@ -107,17 +114,21 @@ public class EventManager implements Listener {
 				fireball.setVelocity(loc.getDirection().normalize().multiply(2));
 				fireball.setShooter(pl);
 				fireball.setIsIncendiary(true);
+				pl.getItemInHand().setDurability((short)(pl.getItemInHand().getDurability() - 1));
+
 				
 			} 
 			else if (pl.getItemInHand().getItemMeta().getDisplayName().equals(MessageManager.freezeStickName)) 
 			{
-				canFreeze = !canFreeze;
-				pl.sendMessage("" + canFreeze);
+				if(freezeSticks.get(pl) == null) freezeSticks.put(pl, new FreezeStick());
+				freezeSticks.get(pl).canFreeze = !freezeSticks.get(pl).canFreeze;
 				
 			}
 			else if (pl.getItemInHand().getItemMeta().getDisplayName().equals(MessageManager.enderStickName))
 			{
 				pl.teleport(pl.getTargetBlock((Set<Material>)null, 30).getLocation());
+				pl.getItemInHand().setDurability((short)(pl.getItemInHand().getDurability() - 1));
+
 			}
 			else if(pl.getItemInHand().getItemMeta().getDisplayName().equals(MessageManager.flightStickName))
 			{
@@ -135,16 +146,17 @@ public class EventManager implements Listener {
 
 		CraftingInventory inventory = event.getInventory();
 		ItemStack[] items = inventory.getMatrix();
-
-		checkCraftStick(event, items, MessageManager.lightningFragmentName);
-		checkCraftStick(event, items, MessageManager.fireFragmentName);
-		checkCraftStick(event, items, MessageManager.flightFragmentName);
-		checkCraftStick(event, items, MessageManager.freezeFragmentName);
-		checkCraftStick(event, items, MessageManager.enderFragmentName);
+		Player player = (Player)event.getView().getPlayer();
+		
+		checkCraftStick(event, items, MessageManager.lightningFragmentName, player);
+		checkCraftStick(event, items, MessageManager.fireFragmentName, player);
+		checkCraftStick(event, items, MessageManager.flightFragmentName, player);
+		checkCraftStick(event, items, MessageManager.freezeFragmentName, player);
+		checkCraftStick(event, items, MessageManager.enderFragmentName, player);
 
 	}
 
-	public void checkCraftStick(PrepareItemCraftEvent event, ItemStack[] items, String fragmentName) {
+	public void checkCraftStick(PrepareItemCraftEvent event, ItemStack[] items, String fragmentName, Player pl) {
 		if (items[0] == null && items[2] != null
 				&& items[2].getItemMeta().getDisplayName().equalsIgnoreCase(fragmentName) && items[1] == null) {
 			if (items[3] == null && items[4] != null
@@ -187,5 +199,17 @@ public class EventManager implements Listener {
 				}
 			}
 		}
+	
+	public void delayStickEvents(int time)
+	{
+		Bukkit.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				
+			}
+		}, time);
+	}
 	
 }
