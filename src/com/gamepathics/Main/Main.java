@@ -31,20 +31,18 @@ public class Main extends JavaPlugin{
 	public void onEnable() 
 	{
 
-
 		NamespacedKey key = new NamespacedKey(this, "powerfulores");
 		stickEnchantment = new StickEnchantment(key);
-		registerEnchants(stickEnchantment);
 		
 		this.getCommand(CommandList.mainCommand).setExecutor((CommandExecutor) new CommandManager());
 		this.getServer().getPluginManager().registerEvents(new EventManager(), this);
-		this.getServer().getPluginManager().registerEvents(new WorldManager(), this);
+		this.getServer().getPluginManager().registerEvents(new WorldManager(), this);		
 		
-	
+		
 		//1800 s = 30 min
 		//36000 ticks = 1800 * 20
-		generateOres(500, 500);  
-
+		generateOres(36000, 36000);  
+		registerEnchants(stickEnchantment);
 		System.out.println(MessageManager.powerfulOresPrefix + " Plugin Enabled");
 		super.onEnable();
 	}
@@ -71,10 +69,15 @@ public class Main extends JavaPlugin{
 		}, timeFromStart, time);
 	}
 
-	
 	private void registerEnchants(Enchantment ench){
 	    try{
-
+	        try {
+	            Field f = Enchantment.class.getDeclaredField("acceptingNew");
+	            f.setAccessible(true);
+	            f.set(null, true);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
 	        try {
 	            Enchantment.registerEnchantment(ench);
 	            System.out.println("Registered enchantment "+ench.getName()+" with id "+ench.getKey()+"!");
