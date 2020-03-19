@@ -61,7 +61,7 @@ public class WorldManager implements Listener {
 			if (e.getBlock().getType().toString().contains(ore.getOre().getType().toString())) {
 				for (int i = 0; i < oresGenerated.size(); i++) {
 					if (oresGenerated.get(i).getLocation().distance(e.getBlock().getLocation()) < 1.5f) {
-						e.getBlock().setType(Material.AIR);
+						e.setDropItems(false);
 						e.getBlock().getWorld().dropItemNaturally(oresGenerated.get(i).getLocation(),
 								oresGenerated.get(i).getItemToDrop());
 						oresGenerated.remove(i);
