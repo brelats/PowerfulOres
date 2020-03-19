@@ -13,7 +13,16 @@ public class MessageManager {
 	public static final String stickDoesNotExist = "This stick does not exist";
 
 	public static final String playerNotFound = "Player not found. Please check the inserted name.";
+	
+	public static final String dontHavePerms = "You don't have permission to do this.";
 
+	//Permissions
+	public static final String permHelpCommand = "powerfulores.commands";
+	public static final String permGiveCommand = "powerfulores.command.give";
+	public static final String permListCommand = "powerfulores.command.lists";
+	
+	
+	
 	
 	//Help
 	public static final String helpCommand = "§3==============================================\n"
@@ -73,32 +82,32 @@ public class MessageManager {
 	
 	
 	//EnderOre
-	public static final String enderOreName = "Ender Ore";
+	public static final String enderOreName = "§2Ender Ore";
 		//EnderFragment
-		public static  String enderFragmentName = "Ender Fragment";
-		public static  String enderFragmentLore = "Use this to craft EnderStick";
+		public static  String enderFragmentName = "§2Ender Fragment";
+		public static  String enderFragmentLore = "Use this to craft " + enderStickName;
 	
 	//FireOre
-	public static final String fireOreName = "Fire Ore";
+	public static final String fireOreName = "§cFire Ore";
 		//FireFragment
-		public static  String fireFragmentName = "Fire Fragment";
-		public static  String fireFragmentLore = "Use this to craft FireStick";
+		public static  String fireFragmentName = "§cFire Fragment";
+		public static  String fireFragmentLore = "Use this to craft " + fireStickName;
 	
 	//FlightOre
-	public static final String flightOreName = "Flight Ore";
+	public static final String flightOreName = "§8Flight Ore";
 		//FlightFragment
-		public static  String flightFragmentName = "Flight Fragment";
-		public static  String flightFragmentLore = "Use this to craft FlightStick";
+		public static  String flightFragmentName = "§8Flight Fragment";
+		public static  String flightFragmentLore = "Use this to craft " + flightStickName;
 	
 	//FrezeOre
-	public static final String freezeOreName = "Freeze Ore";
+	public static final String freezeOreName = "§9Freeze Ore";
 		//FreezeFragment
-		public static  String freezeFragmentName = "Freeze Fragment";
-		public static  String freezeFragmentLore = "Use this to craft FreezeStick";
+		public static  String freezeFragmentName = "§9Freeze Fragment";
+		public static  String freezeFragmentLore = "Use this to craft " + freezeStickName;
 	
 	//LightningOre
-	public static final String lightningOreName = "Lightning Ore";
+	public static final String lightningOreName = "§bLightning Ore";
 		//LightningFragment
-		public static  String lightningFragmentName = "Lightning Fragment";
-		public static String lightningFragmentLore = "Use this to craft LightningStick";
+		public static  String lightningFragmentName = "§bLightning Fragment";
+		public static String lightningFragmentLore = "Use this to craft " + lightningStickName;
 }
