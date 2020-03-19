@@ -104,7 +104,7 @@ public class EnderStick implements IStick {
 	@Override
 	public ItemStack getStick() {
 		// TODO Auto-generated method stub
-		return null;
+		return stickItem;
 	}
 
 	@Override
