@@ -57,7 +57,7 @@ public class EventManager implements Listener {
 	static HashMap<Player, FreezeStick> freezeSticks = new HashMap<Player, FreezeStick>();
 	static HashMap<Player, FlightStick> flightSticks = new HashMap<Player, FlightStick>();
 	static HashMap<Player, Integer> playerInteractCounter = new HashMap<Player, Integer>();
-	int lightningScope, enderScope;
+	int lightningScope = 30, enderScope = 30;
 
 	public EventManager() {
 		sticks.add(new LightningStick());
@@ -134,12 +134,12 @@ public class EventManager implements Listener {
 						pl.getWorld()
 								.strikeLightning(pl.getTargetBlock((Set<Material>) null, lightningScope).getLocation());
 						pl.getInventory().getItemInMainHand().setDurability((short) 1);
-						pl.spawnParticle(Particle.FLASH, pl.getLocation(), 10);
+						pl.spawnParticle(Particle.SPELL_WITCH, pl.getLocation(), 10);
 
 					} else if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
 							.equals(MessageManager.fireStickName)) {
 
-						pl.spawnParticle(Particle.CAMPFIRE_COSY_SMOKE, pl.getLocation(), 10);
+						pl.spawnParticle(Particle.FLAME, pl.getLocation(), 10);
 						Fireball fireball = (Fireball) loc.getWorld().spawnEntity(loc, EntityType.FIREBALL);
 						fireball.setVelocity(loc.getDirection().normalize().multiply(2));
 						fireball.setShooter(pl);
@@ -153,23 +153,24 @@ public class EventManager implements Listener {
 						if (freezeSticks.get(pl) == null)
 							freezeSticks.put(pl, new FreezeStick());
 						freezeSticks.get(pl).canFreeze = !freezeSticks.get(pl).canFreeze;
+						pl.spawnParticle(Particle.SNOW_SHOVEL, pl.getLocation(), 10);
 
 						if (FreezeStick.canFreeze) {
 							pl.sendMessage(MessageManager.freezeStickEnabled);
 
 						} else {
-							pl.sendMessage(MessageManager.freezeStickEnabled);
+							pl.sendMessage(MessageManager.freezeStickDisabled);
 
 						}
 
 					} else if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
 							.equals(MessageManager.enderStickName)) {
-						pl.playSound(pl.getLocation(), Sound.ENTITY_ENDER_PEARL_THROW, 50, 1);
-						pl.spawnParticle(Particle.PORTAL, pl.getLocation(), 10);
+						pl.playSound(pl.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 50, 1);
+						
 						pl.teleport(pl.getTargetBlock((Set<Material>) null, 30).getLocation());
 						pl.getInventory().getItemInMainHand()
 								.setDurability((short) (pl.getInventory().getItemInMainHand().getDurability() - 1));
-
+						pl.spawnParticle(Particle.PORTAL, pl.getLocation(), 10);
 					} else if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
 							.equals(MessageManager.flightStickName)) {
 						pl.spawnParticle(Particle.CLOUD, pl.getLocation(), 10);
