@@ -61,12 +61,18 @@ public class WorldManager implements Listener {
 			if (e.getBlock().getType().toString().contains(ore.getOre().getType().toString())) {
 				for (int i = 0; i < oresGenerated.size(); i++) {
 					if (oresGenerated.get(i).getLocation().distance(e.getBlock().getLocation()) < 1.5f) {
+						if(pl.hasPermission(MessageManager.permOreBreak)) {
 						e.setDropItems(false);
 						e.getBlock().getWorld().dropItemNaturally(oresGenerated.get(i).getLocation(),
 								oresGenerated.get(i).getItemToDrop());
 						oresGenerated.remove(i);
 						saveOres();
 						break;
+						}else {
+							e.setCancelled(true);
+							dontHavePerms(e.getPlayer());
+							break;
+						}
 					}
 				}
 			}
@@ -82,6 +88,7 @@ public class WorldManager implements Listener {
 			for (IOre ore : allOres) {
 				if(e.getItemInHand().getItemMeta().getDisplayName().equals(ore.getOreName()))
 				{
+					if(e.getPlayer().hasPermission(MessageManager.permOrePlace)) {
 					IOre newOre = null;
 					
 					switch (ore.getOreName()) {
@@ -106,7 +113,11 @@ public class WorldManager implements Listener {
 
 					oresGenerated.add(newOre);
 					saveOres();
+				}else {
+					e.setCancelled(true);
+					dontHavePerms(e.getPlayer());
 				}
+			}
 			}
 		}
 		
@@ -263,6 +274,11 @@ public class WorldManager implements Listener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void dontHavePerms(Player player) {
+		player.sendMessage(MessageManager.powerfulOresPrefix + MessageManager.dontHavePerms);
+
 	}
 
 }

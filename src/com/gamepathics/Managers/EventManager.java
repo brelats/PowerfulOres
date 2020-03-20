@@ -107,7 +107,7 @@ public class EventManager implements Listener {
 		
 		}
 	}
-
+	int counter = 100;
 	@EventHandler
 	public void onPlayerInteracts(PlayerInteractEvent x) {
 		pl = x.getPlayer();
@@ -120,7 +120,10 @@ public class EventManager implements Listener {
 			if (pl.getItemInHand().hasItemMeta()) {
 				if (pl.getItemInHand().getItemMeta().getDisplayName().equals(MessageManager.lightningStickName)) {
 					pl.getWorld().strikeLightning(pl.getTargetBlock((Set<Material>) null, 25).getLocation());
-					pl.getItemInHand().setDurability((short) 1);
+					pl.getItemInHand().setDurability((short)counter);
+
+					pl.sendMessage(pl.getItemInHand().getDurability() + "");
+					counter--;
 
 				} else if (pl.getItemInHand().getItemMeta().getDisplayName().equals(MessageManager.fireStickName)) {
 

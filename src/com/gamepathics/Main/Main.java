@@ -17,6 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gamepathics.Managers.CommandList;
 import com.gamepathics.Managers.CommandManager;
+import com.gamepathics.Managers.ConfigManager;
 import com.gamepathics.Managers.EventManager;
 import com.gamepathics.Managers.MessageManager;
 import com.gamepathics.Managers.WorldManager;
@@ -30,13 +31,22 @@ public class Main extends JavaPlugin{
 	@Override
 	public void onEnable() 
 	{
+		File configFile;
+		configFile = new File(getDataFolder(), "config.yml");
+		
+		if(!configFile.exists())
+			ConfigManager.createConfigFile();
+		else
+			ConfigManager.loadConfigFile();	
 
+		
 		NamespacedKey key = new NamespacedKey(this, "powerfulores");
 		stickEnchantment = new StickEnchantment(key);
 		
 		this.getCommand(CommandList.mainCommand).setExecutor((CommandExecutor) new CommandManager());
 		this.getServer().getPluginManager().registerEvents(new EventManager(), this);
 		this.getServer().getPluginManager().registerEvents(new WorldManager(), this);		
+	
 		
 		
 		//1800 s = 30 min
@@ -88,5 +98,11 @@ public class Main extends JavaPlugin{
 	        e.printStackTrace();
 	    }
 	}
+	
+	public void loadDefaultConfig() {
+		getConfig().options().copyDefaults(true);
+		saveConfig();
+	}
+	
 
 }
