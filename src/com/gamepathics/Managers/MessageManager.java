@@ -21,7 +21,9 @@ public class MessageManager {
 	public static final String permGiveCommand = "powerfulores.command.give";
 	public static final String permListCommand = "powerfulores.command.lists";
 	
-	
+	public static final String permOreBreak = "powerfulores.ore.break";
+	public static final String permOrePlace = "powerfulores.ore.place";
+
 	
 	
 	//Help
@@ -79,35 +81,35 @@ public class MessageManager {
 	public static  String freezeStickLore = "[RightClick] Feel the power of the Ice God!";
 
 
-	
-	
+
+
 	//EnderOre
 	public static final String enderOreName = "§2Ender Ore";
 		//EnderFragment
 		public static  String enderFragmentName = "§2Ender Fragment";
-		public static  String enderFragmentLore = "Use this to craft " + enderStickName;
+		public static  String enderFragmentLore = "Use this to craft Ender Stick";
 	
 	//FireOre
 	public static final String fireOreName = "§cFire Ore";
 		//FireFragment
 		public static  String fireFragmentName = "§cFire Fragment";
-		public static  String fireFragmentLore = "Use this to craft " + fireStickName;
+		public static  String fireFragmentLore = "Use this to craft Fire Stick";
 	
 	//FlightOre
 	public static final String flightOreName = "§8Flight Ore";
 		//FlightFragment
 		public static  String flightFragmentName = "§8Flight Fragment";
-		public static  String flightFragmentLore = "Use this to craft " + flightStickName;
+		public static  String flightFragmentLore = "Use this to craft Flight Stick";
 	
 	//FrezeOre
 	public static final String freezeOreName = "§9Freeze Ore";
 		//FreezeFragment
 		public static  String freezeFragmentName = "§9Freeze Fragment";
-		public static  String freezeFragmentLore = "Use this to craft " + freezeStickName;
+		public static  String freezeFragmentLore = "Use this to craft Freeze Stick";
 	
 	//LightningOre
 	public static final String lightningOreName = "§bLightning Ore";
 		//LightningFragment
 		public static  String lightningFragmentName = "§bLightning Fragment";
-		public static String lightningFragmentLore = "Use this to craft " + lightningStickName;
+		public static String lightningFragmentLore = "Use this to craft Lightning Stick";
 }
