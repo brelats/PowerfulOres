@@ -29,7 +29,8 @@ public class EnderStick implements IStick {
 	String stickLore = MessageManager.enderStickLore;
 	String permission = "";
 	Enchantment stickEnchantment;
-	
+	public boolean canTp = false;
+
 	
 	public EnderStick() {
 		

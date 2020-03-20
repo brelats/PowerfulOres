@@ -32,7 +32,8 @@ public class FlightStick implements IStick{
 	String stickLore = MessageManager.flightStickLore;
 	String permission = "";
 	Enchantment stickEnchantment;
-	
+	public boolean canFlight = false;
+
 	
 	public FlightStick() {
 		
