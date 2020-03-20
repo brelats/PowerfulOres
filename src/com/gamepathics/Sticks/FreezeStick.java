@@ -8,8 +8,10 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
+
 
 import com.gamepathics.Interfaces.IStick;
 import com.gamepathics.Main.Main;
@@ -30,12 +32,15 @@ public class FreezeStick implements IStick {
 	String stickLore = MessageManager.freezeStickLore;
 	String permission = "";
 	Enchantment stickEnchantment;
-	public boolean canFreeze = false;
+	public static boolean canFreeze = false;
 	
 	public FreezeStick() {
 	
 		ArrayList<String> loreList = new ArrayList<String>();
+		
 		loreList.add(stickLore);
+	
+		
 		stickMeta.setDisplayName(stickName);
 		stickMeta.setLore(loreList);
 		stickMeta.addEnchant(Main.stickEnchantment, 1, true);

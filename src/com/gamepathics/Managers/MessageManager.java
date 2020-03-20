@@ -75,10 +75,14 @@ public class MessageManager {
 	// FlightStick
 	public static  String flightStickName = "§8Flight Stick";
 	public static  String flightStickLore = "[RightClick] Feel the power of the Wind God!";
+	public static  String flightStickEnabled = "[FLIGHT ENABLED]";
+	public static  String flightStickDisabled = "[FLIGHT DISABLED]";
 
 	// FreezeStick
 	public static  String freezeStickName = "§9Freeze Stick";
 	public static  String freezeStickLore = "[RightClick] Feel the power of the Ice God!";
+	public static  String freezeStickEnabled = "[FREEZE ENABLED]";
+	public static  String freezeStickDisabled = "[FREEZE DISABLED]";
 
 
 
