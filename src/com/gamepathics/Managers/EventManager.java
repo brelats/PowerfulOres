@@ -57,7 +57,7 @@ public class EventManager implements Listener {
 	static HashMap<Player, FreezeStick> freezeSticks = new HashMap<Player, FreezeStick>();
 	static HashMap<Player, FlightStick> flightSticks = new HashMap<Player, FlightStick>();
 	static HashMap<Player, Integer> playerInteractCounter = new HashMap<Player, Integer>();
-	int lightningScope = 30, enderScope = 30;
+	public static int lightningScope = 30, enderScope = 30;
 
 	public EventManager() {
 		sticks.add(new LightningStick());
@@ -167,7 +167,7 @@ public class EventManager implements Listener {
 							.equals(MessageManager.enderStickName)) {
 						pl.playSound(pl.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 50, 1);
 						
-						pl.teleport(pl.getTargetBlock((Set<Material>) null, 30).getLocation());
+						pl.teleport(pl.getTargetBlock((Set<Material>) null, enderScope).getLocation());
 						pl.getInventory().getItemInMainHand()
 								.setDurability((short) (pl.getInventory().getItemInMainHand().getDurability() - 1));
 						pl.spawnParticle(Particle.PORTAL, pl.getLocation(), 10);

@@ -27,7 +27,7 @@ import com.gamepathics.Sticks.StickEnchantment;
 public class Main extends JavaPlugin{
 	
 	public static StickEnchantment stickEnchantment;
-	
+	public static int generationTime = 18000; //seconds
 	@Override
 	public void onEnable() 
 	{
@@ -48,10 +48,10 @@ public class Main extends JavaPlugin{
 		this.getServer().getPluginManager().registerEvents(new WorldManager(), this);		
 	
 		
-		
+		int finalTime = generationTime * 20;
 		//1800 s = 30 min
 		//36000 ticks = 1800 * 20
-		generateOres(36000, 36000);  
+		generateOres(finalTime, finalTime);  
 		registerEnchants(stickEnchantment);
 		System.out.println(MessageManager.powerfulOresPrefix + " Plugin Enabled");
 		super.onEnable();

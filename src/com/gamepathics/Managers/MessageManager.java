@@ -9,12 +9,12 @@ public class MessageManager {
 	public static final String oreGived = " §3gived to ";
 	
 	//Errors
-	public static final String oreDoesNotExist = "This ore does not exist";
-	public static final String stickDoesNotExist = "This stick does not exist";
+	public static  String oreDoesNotExist = "This ore does not exist";
+	public static  String stickDoesNotExist = "This stick does not exist";
 
-	public static final String playerNotFound = "Player not found. Please check the inserted name.";
+	public static  String playerNotFound = "Player not found. Please check the inserted name.";
 	
-	public static final String dontHavePerms = "You don't have permission to do this.";
+	public static  String dontHavePerms = "You don't have permission to do this.";
 
 	//Permissions
 	public static final String permHelpCommand = "powerfulores.commands";
@@ -81,6 +81,8 @@ public class MessageManager {
 	// FreezeStick
 	public static  String freezeStickName = "§9Freeze Stick";
 	public static  String freezeStickLore = "[RightClick] Feel the power of the Ice God!";
+	
+	
 	public static  String freezeStickEnabled = powerfulOresPrefix + "Freeze Enabled";
 	public static  String freezeStickDisabled =  powerfulOresPrefix + "§cFreeze Disabled";
 
