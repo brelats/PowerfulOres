@@ -4,6 +4,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public interface IStick {
 	
@@ -34,5 +35,8 @@ public interface IStick {
 	
 	public ItemStack getStick();
 	public ItemStack setStick();
+	
+	
+	public ItemMeta substractDurability(int k) ;
 
 }

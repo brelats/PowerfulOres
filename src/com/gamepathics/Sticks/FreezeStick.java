@@ -32,21 +32,36 @@ public class FreezeStick implements IStick {
 	String stickLore = MessageManager.freezeStickLore;
 	String permission = "";
 	Enchantment stickEnchantment;
-	public static boolean canFreeze = false;
+	public boolean canFreeze = false;
+	public int maxDurability = 100;
+	public int durability;
+	ArrayList<String> loreList; 
 	
 	public FreezeStick() {
 	
-		ArrayList<String> loreList = new ArrayList<String>();
-		
+		loreList = new ArrayList<String>();
+		durability = maxDurability;
 		loreList.add(stickLore);
-	
+		loreList.add(durability + "/" + maxDurability);
 		
 		stickMeta.setDisplayName(stickName);
 		stickMeta.setLore(loreList);
 		stickMeta.addEnchant(Main.stickEnchantment, 1, true);
-		stickItem.setDurability((short)100);
 		stickItem.setItemMeta(stickMeta);
 	}
+	
+	@Override
+	public ItemMeta substractDurability(int k) {
+		durability -= k;
+		String lore = durability + " / " + maxDurability;
+		
+		loreList.set(1, lore);
+		stickMeta.setLore(loreList);
+	
+
+		
+		return stickMeta;
+		}
 	
 	@Override
 	public String getStickName() {

@@ -1,6 +1,7 @@
 package com.gamepathics.Sticks;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -31,19 +32,36 @@ public class FireStick implements IStick{
 	String stickLore = MessageManager.fireStickLore;
 	String permission = "";
 	Enchantment stickEnchantment;
-	
+	public int maxDurability = 100;
+	public int durability;
+	ArrayList<String> loreList; 
 	
 	public FireStick() {
 		
-		ArrayList<String> loreList = new ArrayList<String>();
+		loreList = new ArrayList<String>();
+		durability = maxDurability;
 		loreList.add(stickLore);
-		stickItem.setDurability((short)100);
+		loreList.add(durability + " / " + maxDurability);
 		stickMeta.addEnchant(Main.stickEnchantment, 1, true);
 		stickMeta.setDisplayName(stickName);
 		stickMeta.setLore(loreList);
 		stickItem.setItemMeta(stickMeta);
 
 	}
+	
+	@Override
+	public ItemMeta substractDurability(int k) {
+		durability -= k;
+		String lore = durability + " / " + maxDurability;
+		
+		loreList.set(1, lore);
+		stickMeta.setLore(loreList);
+	
+
+		
+		return stickMeta;
+		}
+		
 	
 	@Override
 	public String getStickName() {

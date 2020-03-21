@@ -34,6 +34,7 @@ import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitTask;
 
 import com.gamepathics.Interfaces.IOre;
 import com.gamepathics.Interfaces.IStick;
@@ -56,8 +57,14 @@ public class EventManager implements Listener {
 	static ArrayList<IStick> sticks = new ArrayList<IStick>();
 	static HashMap<Player, FreezeStick> freezeSticks = new HashMap<Player, FreezeStick>();
 	static HashMap<Player, FlightStick> flightSticks = new HashMap<Player, FlightStick>();
+	static HashMap<Player, LightningStick> lightningSticks = new HashMap<Player, LightningStick>();
+	static HashMap<Player, EnderStick> enderSticks = new HashMap<Player, EnderStick>();
+	static HashMap<Player, FireStick> fireSticks = new HashMap<Player, FireStick>();
+
 	static HashMap<Player, Integer> playerInteractCounter = new HashMap<Player, Integer>();
 	public static int lightningScope = 30, enderScope = 30;
+	public static int flightTime = 100;
+	public static boolean incendiaryFireball = true, glowingFireball = true;
 
 	public EventManager() {
 		sticks.add(new LightningStick());
@@ -91,9 +98,7 @@ public class EventManager implements Listener {
 							}
 						}
 
-					} else {
-						freezeSticks.get(player).canFreeze = false;
-					}
+					} 
 
 				}
 			}
@@ -109,8 +114,22 @@ public class EventManager implements Listener {
 					.equals(MessageManager.flightStickName)) {
 				if (flightSticks.get(player) != null) {
 					if (player.getGameMode().equals(GameMode.SURVIVAL)) {
-
+						if (flightSticks.get(player).canFlight) {
+							
+						flightSticks.get(player).canFlight = false;
 						player.setAllowFlight(false);
+						player.sendMessage(MessageManager.flightStickDisabled);
+						}
+					}
+				}
+			}else if(player.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
+					.equals(MessageManager.freezeStickName))
+			{
+				if (freezeSticks.get(player) != null) {
+					if (freezeSticks.get(player).canFreeze) {
+
+						freezeSticks.get(player).canFreeze = false;
+						player.sendMessage(MessageManager.freezeStickDisabled);
 					}
 				}
 			}
@@ -128,67 +147,131 @@ public class EventManager implements Listener {
 			if (x.getHand().equals(EquipmentSlot.HAND)) {
 
 				if (pl.getInventory().getItemInMainHand().hasItemMeta()) {
-					if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
+
+/* Lightning */ 		if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
 							.equals(MessageManager.lightningStickName)) {
 
-						pl.getWorld()
-								.strikeLightning(pl.getTargetBlock((Set<Material>) null, lightningScope).getLocation());
-						pl.getInventory().getItemInMainHand().setDurability((short) 1);
-						pl.spawnParticle(Particle.SPELL_WITCH, pl.getLocation(), 10);
+						if (lightningSticks.get(pl) == null) {
+							lightningSticks.put(pl, new LightningStick());
 
-					} else if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
-							.equals(MessageManager.fireStickName)) {
+						} else {
+							if (lightningSticks.get(pl).durability > 0) {
+								pl.getWorld().strikeLightning(
+										pl.getTargetBlock((Set<Material>) null, lightningScope).getLocation());
+								pl.spawnParticle(Particle.SPELL_WITCH, pl.getLocation(), 10);
+								pl.getInventory().getItemInMainHand()
+										.setItemMeta(lightningSticks.get(pl).substractDurability(1));
+							} else if (lightningSticks.get(pl).durability <= 0){
+							
+								pl.getInventory().getItemInMainHand().setAmount(0);
+								lightningSticks.remove(pl);
+								}
+						}
 
-						pl.spawnParticle(Particle.FLAME, pl.getLocation(), 10);
-						Fireball fireball = (Fireball) loc.getWorld().spawnEntity(loc, EntityType.FIREBALL);
-						fireball.setVelocity(loc.getDirection().normalize().multiply(2));
-						fireball.setShooter(pl);
-						fireball.setIsIncendiary(true);
-						fireball.setGlowing(true);
-						pl.getInventory().getItemInMainHand()
-								.setDurability((short) (pl.getInventory().getItemInMainHand().getDurability() - 1));
+/* Fire */				} else if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
+								.equals(MessageManager.fireStickName)) {
+						if (fireSticks.get(pl) == null) {
+							fireSticks.put(pl, new FireStick());
 
-					} else if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
-							.equals(MessageManager.freezeStickName)) {
-						if (freezeSticks.get(pl) == null)
+						} else {
+							if (fireSticks.get(pl).durability > 0) {
+
+								pl.spawnParticle(Particle.FLAME, pl.getLocation(), 10);
+								Fireball fireball = (Fireball) loc.getWorld().spawnEntity(loc, EntityType.FIREBALL);
+								fireball.setVelocity(loc.getDirection().normalize().multiply(2));
+								fireball.setShooter(pl);
+								fireball.setIsIncendiary(incendiaryFireball);
+								fireball.setGlowing(glowingFireball);
+								pl.getInventory().getItemInMainHand().setItemMeta(fireSticks.get(pl).substractDurability(1));
+
+							} else if (fireSticks.get(pl).durability <= 0){
+							
+								pl.getInventory().getItemInMainHand().setAmount(0);
+								fireSticks.remove(pl);
+								}
+						}
+
+					
+
+/* Freeze */ 			} else if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
+								.equals(MessageManager.freezeStickName)) {
+						if (freezeSticks.get(pl) == null) {
 							freezeSticks.put(pl, new FreezeStick());
-						freezeSticks.get(pl).canFreeze = !freezeSticks.get(pl).canFreeze;
-						pl.spawnParticle(Particle.SNOW_SHOVEL, pl.getLocation(), 10);
-
-						if (FreezeStick.canFreeze) {
-							pl.sendMessage(MessageManager.freezeStickEnabled);
-
-						} else {
-							pl.sendMessage(MessageManager.freezeStickDisabled);
-
 						}
-
-					} else if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
-							.equals(MessageManager.enderStickName)) {
-						pl.playSound(pl.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 50, 1);
 						
-						pl.teleport(pl.getTargetBlock((Set<Material>) null, enderScope).getLocation());
-						pl.getInventory().getItemInMainHand()
-								.setDurability((short) (pl.getInventory().getItemInMainHand().getDurability() - 1));
-						pl.spawnParticle(Particle.PORTAL, pl.getLocation(), 10);
-					} else if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
-							.equals(MessageManager.flightStickName)) {
-						pl.spawnParticle(Particle.CLOUD, pl.getLocation(), 10);
-						if (flightSticks.get(pl) == null)
-							flightSticks.put(pl, new FlightStick());
-						flightSticks.get(pl).canFlight = !flightSticks.get(pl).canFlight;
-						pl.setAllowFlight(!pl.getAllowFlight());
-						if (pl.getAllowFlight()) {
-							pl.sendMessage(MessageManager.flightStickEnabled);
+							if (freezeSticks.get(pl).durability > 0) {
 
+								freezeSticks.get(pl).canFreeze = !freezeSticks.get(pl).canFreeze;
+								pl.spawnParticle(Particle.SNOW_SHOVEL, pl.getLocation(), 10);
+
+								if (freezeSticks.get(pl).canFreeze) {
+									pl.sendMessage(MessageManager.freezeStickEnabled);
+
+								} else {
+									pl.sendMessage(MessageManager.freezeStickDisabled);
+
+								}
+							} else if (freezeSticks.get(pl).durability <= 0){
+							
+								pl.getInventory().getItemInMainHand().setAmount(0);
+								freezeSticks.remove(pl);
+								}
+						
+
+/* Ender */ 			} else if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
+								.equals(MessageManager.enderStickName)) {
+						if (enderSticks.get(pl) == null) {
+							enderSticks.put(pl, new EnderStick());
 						} else {
-							pl.sendMessage(MessageManager.flightStickDisabled);
+							if (enderSticks.get(pl).durability > 0) {
+						
+						pl.getInventory().getItemInMainHand().setItemMeta(enderSticks.get(pl).substractDurability(1));
+						pl.playSound(pl.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 50, 1);
+						pl.teleport(pl.getTargetBlock((Set<Material>) null, enderScope).getLocation());
+						pl.spawnParticle(Particle.PORTAL, pl.getLocation(), 10);
+						}else if (enderSticks.get(pl).durability <= 0){
+							
+							pl.getInventory().getItemInMainHand().setAmount(0);
+							enderSticks.remove(pl);
+							}
 						}
+/* Flight */			} else if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
+							.equals(MessageManager.flightStickName)) {
+	
+	
+						pl.spawnParticle(Particle.CLOUD, pl.getLocation(), 10);
+						if (flightSticks.get(pl) == null) {
+							flightSticks.put(pl, new FlightStick());
+							
+						}
+							
+							if (flightSticks.get(pl).durability > 0) {
+						
+								flightSticks.get(pl).canFlight = !flightSticks.get(pl).canFlight;
+						
+								if (flightSticks.get(pl).canFlight) {
+									pl.sendMessage(MessageManager.flightStickEnabled);
+									delayStickEvents(flightTime, flightSticks.get(pl), pl);
 
-						delayStickEvents(200, flightSticks.get(pl), pl);
 
+								} else {
+									pl.sendMessage(MessageManager.flightStickDisabled);
+							
+
+								}
+						pl.setAllowFlight(flightSticks.get(pl).canFlight);
+						
+
+						delayStickEvents(flightTime, flightSticks.get(pl), pl);
+						
+					}else if (flightSticks.get(pl).durability <= 0){
+						
+						pl.getInventory().getItemInMainHand().setAmount(0);
+						flightSticks.remove(pl);
+						}
+					
 					}
-				}
+					}
 			}
 
 		}
@@ -245,31 +328,37 @@ public class EventManager implements Listener {
 	}
 
 	public void delayStickEvents(int time, FlightStick stick, Player pl) {
-		Bukkit.getServer().getScheduler().runTask(plugin, new Runnable() {
+		
+		final BukkitTask id = Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
 
 			@Override
 			public void run() {
-
-				while (stick.canFlight) {
+				if(stick.canFlight)
+				{
+					pl.sendMessage("HOLA");
+				}else {
 					try {
-						Thread.sleep(time);
-						if (stick.getStick().getDurability() <= 0) {
-							pl.setAllowFlight(false);
-							pl.getInventory().getItemInMainHand().setType(Material.AIR);
-							break;
-						}
+						Bukkit.getScheduler().cancelTask(id.getTaskId());
 
-						stick.getStick().setDurability((short) (stick.getStick().getDurability() - 1));
-
-					} catch (InterruptedException e) {
+					} catch (Throwable e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
 				}
+				
+
+//						if (stick.durability <= 0) {
+//							pl.setAllowFlight(false);
+//							pl.getInventory().getItemInMainHand().setAmount(0);
+//							
+//						}else{
+//							pl.getInventory().getItemInMainHand().setItemMeta(stick.substractDurability(1));
+//						}
+
+
 
 			}
-		});
+		}, time , time);
 	}
 
 }
