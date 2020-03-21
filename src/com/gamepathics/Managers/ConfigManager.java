@@ -66,6 +66,9 @@ public class ConfigManager {
 			EventManager.lightningScope = config.getInt("Lightning Stick Scope");
 			
 			Main.generationTime = config.getInt("Ores Generation Time");
+			
+			EventManager.glowingFireball = config.getBoolean("Set Glowing Fireball");
+			EventManager.incendiaryFireball = config.getBoolean("Set Incendiary Fireball");
 
 
 	}

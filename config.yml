@@ -1,0 +1,84 @@
+###########################
+#                         #
+#       POWERFUL ORES     #
+#                         #
+###########################
+
+
+#MESSAGES
+Sticks:
+
+    Fire Stick:
+        Name: §cFire Stick
+        Lore: '[RightClick] Feel the power of the Fire God!'
+        
+    Ender Stick:
+        Name: '§2Ender Stick'
+        Lore: '[RightClick] Feel the power of the Ender God!'
+
+    Flight Stick:
+        Name: '§8Flight Stick'
+        Lore: '[RightClick] Feel the power of the Wind God!'
+        Flight Enabled: 'Flight Enabled'
+        Flight Disabled: '§cFlight Disabled'
+
+    Lightning Stick:
+        Name: '§bLightning Stick'
+        Lore: '[RightClick] Feel the power of the Lightning God!'
+
+    Freeze Stick:
+        Name: '§9Freeze Stick'
+        Lore: '[RightClick] Feel the power of the Ice God!'
+        Freeze Enabled: 'Freeze Enabled'
+        Freeze Disabled: '§cFreeze Disabled'
+
+    
+Fragments:
+
+    Fire Fragment:
+        Name: '§cFire Fragment'
+        Lore: 'Use this to craft Fire Stick'
+        
+    Ender Fragment:
+        Name: '§2Ender Fragment'
+        Lore: 'Use this to craft Ender Stick'
+
+    Flight Fragment:
+        Name: '§8Flight Fragment'
+        Lore: 'Use this to craft Flight Stick'
+
+    Lightning Fragment:
+        Name: '§bLightning Fragment'
+        Lore: 'Use this to craft Lightning Stick'
+
+    Freeze Fragment:
+        Name: '§9Freeze Fragment'
+        Lore: 'Use this to craft Freeze Stick'
+
+
+Errors:   
+
+    Dont Have Permissions: 'You don´t have permission to do this.'
+    
+    Player Not Found: 'Player not found. Please check the inserted name.'
+    
+    Stick Doesnt Exist: 'This stick does not exist'
+    
+    Ore Doesnt Exist: 'This ore does not exist'
+ 
+ 
+#CONFIG
+Lightning Stick Scope: 30 #blocks
+
+Ender Stick Scope: 30 #blocks
+
+Ores Generation Time: 1800 #seconds
+
+Sticks Uses Duration: 100 #uses
+
+Set Incendiary Fireball: true 
+
+Set Glowing Fireball: true
+
+
+
