@@ -62,6 +62,7 @@ public class Main extends JavaPlugin{
 	{
 		
 		System.out.println(MessageManager.powerfulOresPrefix + " Plugin Disabled");
+		
 		super.onDisable();
 	}
 	

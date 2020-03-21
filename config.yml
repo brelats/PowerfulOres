@@ -11,26 +11,31 @@ Sticks:
     Fire Stick:
         Name: §cFire Stick
         Lore: '[RightClick] Feel the power of the Fire God!'
+        Durability: 100 #uses
         
     Ender Stick:
         Name: '§2Ender Stick'
         Lore: '[RightClick] Feel the power of the Ender God!'
+        Durability: 100 #uses
 
     Flight Stick:
         Name: '§8Flight Stick'
         Lore: '[RightClick] Feel the power of the Wind God!'
         Flight Enabled: 'Flight Enabled'
         Flight Disabled: '§cFlight Disabled'
-
+        Durability: 100 #uses
+        
     Lightning Stick:
         Name: '§bLightning Stick'
         Lore: '[RightClick] Feel the power of the Lightning God!'
+        Durability: 100 #uses
 
     Freeze Stick:
         Name: '§9Freeze Stick'
         Lore: '[RightClick] Feel the power of the Ice God!'
         Freeze Enabled: 'Freeze Enabled'
         Freeze Disabled: '§cFreeze Disabled'
+        Durability: 100 #uses
 
     
 Fragments:
@@ -74,11 +79,12 @@ Ender Stick Scope: 30 #blocks
 
 Ores Generation Time: 1800 #seconds
 
-Sticks Uses Duration: 100 #uses
-
 Set Incendiary Fireball: true 
 
 Set Glowing Fireball: true
 
+Flight Durability Time: 1000 #miliseconds
 
+Freeze Durability Time: 1000 #miliseconds
 
+Destroy Ice Time: 100 #ticks

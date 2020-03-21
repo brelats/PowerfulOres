@@ -28,7 +28,7 @@ public class LightningStick implements IStick{
 	String stickLore = MessageManager.lightningStickLore;
 	String permission = "";
 	Enchantment stickEnchantment;
-	public int maxDurability = 100;
+	public static int maxDurability = 100;
 	public int durability;
 	ArrayList<String> loreList; 
 	

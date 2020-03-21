@@ -30,7 +30,7 @@ public class EnderStick implements IStick {
 	String permission = "";
 	Enchantment stickEnchantment;
 	public boolean canTp = false;
-	public int maxDurability = 100;
+	public static int maxDurability = 100;
 	public int durability;
 	ArrayList<String> loreList; 
 	

@@ -8,6 +8,11 @@ import java.util.Scanner;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import com.gamepathics.Main.Main;
+import com.gamepathics.Sticks.EnderStick;
+import com.gamepathics.Sticks.FireStick;
+import com.gamepathics.Sticks.FlightStick;
+import com.gamepathics.Sticks.FreezeStick;
+import com.gamepathics.Sticks.LightningStick;
 
 public class ConfigManager {
 
@@ -19,25 +24,31 @@ public class ConfigManager {
 			//STICK
 			MessageManager.fireStickName = config.getString("Sticks.Fire Stick.Name");
 			MessageManager.fireStickLore = config.getString("Sticks.Fire Stick.Lore");
-
+			FireStick.maxDurability = config.getInt("Sticks.Fire Stick.Durability");
+			
 			MessageManager.flightStickName = config.getString("Sticks.Flight Stick.Name");
 			MessageManager.flightStickLore = config.getString("Sticks.Flight Stick.Lore");
 			MessageManager.flightStickEnabled = config.getString("Sticks.Flight Stick.Flight Enabled");
 			MessageManager.flightStickDisabled = config.getString("Sticks.Flight Stick.Flight Disabled");
-			
+			FlightStick.maxDurability = config.getInt("Sticks.Flight Stick.Durability");
+
 
 			MessageManager.freezeStickName = config.getString("Sticks.Freeze Stick.Name");
 			MessageManager.freezeStickLore = config.getString("Sticks.Freeze Stick.Lore");
 			MessageManager.freezeStickEnabled = config.getString("Sticks.Freeze Stick.Freeze Enabled");
 			MessageManager.freezeStickDisabled = config.getString("Sticks.Freeze Stick.Freeze Disabled");
+			FreezeStick.maxDurability = config.getInt("Sticks.Freeze Stick.Durability");
 
 			
 			MessageManager.lightningStickName = config.getString("Sticks.Lightning Stick.Name");
 			MessageManager.lightningStickLore = config.getString("Sticks.Lightning Stick.Lore");
+			LightningStick.maxDurability = config.getInt("Sticks.Lightning Stick.Durability");
+
 			
 			MessageManager.enderStickName = config.getString("Sticks.Ender Stick.Name");
 			MessageManager.enderStickLore = config.getString("Sticks.Ender Stick.Lore");
-			
+			EnderStick.maxDurability = config.getInt("Sticks.Ender Stick.Durability");
+
 			//FRAGMENTS
 			MessageManager.fireFragmentName = config.getString("Fragments.Fire Fragment.Name");
 			MessageManager.fireFragmentLore = config.getString("Fragments.Fire Fragment.Lore");
@@ -69,8 +80,13 @@ public class ConfigManager {
 			
 			EventManager.glowingFireball = config.getBoolean("Set Glowing Fireball");
 			EventManager.incendiaryFireball = config.getBoolean("Set Incendiary Fireball");
+			EventManager.flightDurabilityTime = config.getInt("Flight Durability Time");
+			EventManager.freezeDurabilityTime = config.getInt("Freeze Durability Time");
+			EventManager.destroyIceTime = config.getInt("Destroy Ice Time");
 
 
+			
+			
 	}
 	
 	public static void createConfigFile()

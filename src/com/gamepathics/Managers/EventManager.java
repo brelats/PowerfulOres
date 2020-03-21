@@ -34,6 +34,7 @@ import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 import com.gamepathics.Interfaces.IOre;
@@ -62,8 +63,14 @@ public class EventManager implements Listener {
 	static HashMap<Player, FireStick> fireSticks = new HashMap<Player, FireStick>();
 
 	static HashMap<Player, Integer> playerInteractCounter = new HashMap<Player, Integer>();
+	public static ArrayList<BukkitTask> threads =  new ArrayList<BukkitTask>();
+	
+	//CONFIG
 	public static int lightningScope = 30, enderScope = 30;
-	public static int flightTime = 100;
+	public static int flightDurabilityTime = 1000;
+	public static int freezeDurabilityTime = 1000;
+	public static int destroyIceTime = 100;
+	
 	public static boolean incendiaryFireball = true, glowingFireball = true;
 
 	public EventManager() {
@@ -83,20 +90,7 @@ public class EventManager implements Listener {
 					.equals(MessageManager.freezeStickName)) {
 				if (freezeSticks.get(player) != null) {
 					if (freezeSticks.get(player).canFreeze) {
-
-						for (int i = 0; i < 3; ++i) {
-
-							for (int j = 0; j < 3; ++j) {
-								if (!player.getWorld()
-										.getBlockAt(new Location(player.getWorld(), player.getLocation().getX() + i - 1,
-												player.getLocation().getBlockY() - 1,
-												player.getLocation().getZ() + j - 1))
-										.getType().equals(Material.BEDROCK))
-									player.getWorld().getBlockAt(new Location(player.getWorld(),
-											player.getLocation().getX() + i - 1, player.getLocation().getBlockY() - 1,
-											player.getLocation().getZ() + j - 1)).setType(Material.ICE);
-							}
-						}
+							generateIceFreezeStick(player, freezeSticks.get(player));
 
 					} 
 
@@ -206,6 +200,7 @@ public class EventManager implements Listener {
 
 								if (freezeSticks.get(pl).canFreeze) {
 									pl.sendMessage(MessageManager.freezeStickEnabled);
+									substractFreezeStickDurability(freezeDurabilityTime, freezeSticks.get(pl), pl);
 
 								} else {
 									pl.sendMessage(MessageManager.freezeStickDisabled);
@@ -251,7 +246,7 @@ public class EventManager implements Listener {
 						
 								if (flightSticks.get(pl).canFlight) {
 									pl.sendMessage(MessageManager.flightStickEnabled);
-									delayStickEvents(flightTime, flightSticks.get(pl), pl);
+									substractFlightStickDurability(flightDurabilityTime, flightSticks.get(pl), pl);
 
 
 								} else {
@@ -261,8 +256,6 @@ public class EventManager implements Listener {
 								}
 						pl.setAllowFlight(flightSticks.get(pl).canFlight);
 						
-
-						delayStickEvents(flightTime, flightSticks.get(pl), pl);
 						
 					}else if (flightSticks.get(pl).durability <= 0){
 						
@@ -327,38 +320,116 @@ public class EventManager implements Listener {
 		}
 	}
 
-	public void delayStickEvents(int time, FlightStick stick, Player pl) {
-		
-		final BukkitTask id = Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
+	public void substractFlightStickDurability(int time, FlightStick stick, Player pl) {
+
+		BukkitTask t = Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
 
 			@Override
 			public void run() {
-				if(stick.canFlight)
-				{
-					pl.sendMessage("HOLA");
-				}else {
+				while (stick.canFlight) {
 					try {
-						Bukkit.getScheduler().cancelTask(id.getTaskId());
+						if (stick.durability > 0) {
+							Thread.sleep((long) time);
+							if (pl.getInventory().getItemInMainHand().hasItemMeta())
+								if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
+										.equalsIgnoreCase(MessageManager.flightStickName))
+									pl.getInventory().getItemInMainHand().setItemMeta(stick.substractDurability(1));
 
-					} catch (Throwable e) {
-						// TODO Auto-generated catch block
+						} else if (stick.durability <= 0) {
+							pl.getInventory().getItemInMainHand().setAmount(0);
+							pl.sendMessage(MessageManager.flightStickDisabled);
+							pl.setAllowFlight(false);
+							stick.canFlight = false;
+							flightSticks.remove(pl);
+							break;
+						}
+					} catch (InterruptedException e) {
+
 						e.printStackTrace();
 					}
 				}
 				
+			}
+		});
+		
+		t.cancel();
+	}
+	
+	public void generateIceFreezeStick(Player player, FreezeStick stick)
+	{
 
-//						if (stick.durability <= 0) {
-//							pl.setAllowFlight(false);
-//							pl.getInventory().getItemInMainHand().setAmount(0);
-//							
-//						}else{
-//							pl.getInventory().getItemInMainHand().setItemMeta(stick.substractDurability(1));
-//						}
+		for (int i = 0; i < 3; ++i) {
 
-
+			for (int j = 0; j < 3; ++j) {
+				if (!player.getWorld()
+						.getBlockAt(new Location(player.getWorld(), player.getLocation().getX() + i - 1,
+								player.getLocation().getBlockY() - 1,
+								player.getLocation().getZ() + j - 1))
+						.getType().equals(Material.BEDROCK))
+				{
+					
+					Block b = player.getWorld().getBlockAt(new Location(player.getWorld(),
+							player.getLocation().getX() + i - 1, player.getLocation().getBlockY() - 1,
+							player.getLocation().getZ() + j - 1));
+						
+					b.setType(Material.ICE);
+					
+					destroyIce(destroyIceTime, b);
+				}
+					
+					
+			}
+		}
+	}
+	
+	public void destroyIce(int time, Block block)
+	{
+		BukkitTask t = Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+			
+			@Override
+			public void run()  
+			{
+				block.breakNaturally();
 
 			}
-		}, time , time);
+			
+		}, time);
+		
+		t.cancel();
+	}
+	
+	
+	public void substractFreezeStickDurability(int time, FreezeStick stick, Player pl) {
+
+		BukkitTask t = Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+
+			@Override
+			public void run() {
+				while (stick.canFreeze) {
+					try {
+						if (stick.durability > 0) {
+							Thread.sleep((long) time);
+							if (pl.getInventory().getItemInMainHand().hasItemMeta())
+								if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
+										.equalsIgnoreCase(MessageManager.freezeStickName))
+									
+									pl.getInventory().getItemInMainHand().setItemMeta(stick.substractDurability(1));
+
+						} else if (stick.durability <= 0) {
+							pl.getInventory().getItemInMainHand().setAmount(0);
+							pl.sendMessage(MessageManager.freezeStickDisabled);
+							stick.canFreeze = false;
+							freezeSticks.remove(pl);
+							break;
+						}
+					} catch (InterruptedException e) {
+
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		t.cancel();
 	}
 
 }

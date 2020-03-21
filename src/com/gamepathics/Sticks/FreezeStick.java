@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -33,9 +34,10 @@ public class FreezeStick implements IStick {
 	String permission = "";
 	Enchantment stickEnchantment;
 	public boolean canFreeze = false;
-	public int maxDurability = 100;
+	public static int maxDurability = 100;
 	public int durability;
 	ArrayList<String> loreList; 
+	public ArrayList<Block> iceGenerated = new ArrayList<Block>();
 	
 	public FreezeStick() {
 	

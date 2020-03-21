@@ -31,7 +31,7 @@ public class FlightStick implements IStick{
 	String permission = "";
 	Enchantment stickEnchantment;
 	public boolean canFlight = false;
-	public int maxDurability = 100;
+	public static int maxDurability = 100;
 	public int durability;
 	ArrayList<String> loreList; 
 	

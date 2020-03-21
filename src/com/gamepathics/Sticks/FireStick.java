@@ -32,7 +32,7 @@ public class FireStick implements IStick{
 	String stickLore = MessageManager.fireStickLore;
 	String permission = "";
 	Enchantment stickEnchantment;
-	public int maxDurability = 100;
+	public static int maxDurability = 100;
 	public int durability;
 	ArrayList<String> loreList; 
 	
