@@ -322,7 +322,7 @@ public class EventManager implements Listener {
 
 	public void substractFlightStickDurability(int time, FlightStick stick, Player pl) {
 
-		BukkitTask t = Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+		Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
 
 			@Override
 			public void run() {
@@ -352,7 +352,7 @@ public class EventManager implements Listener {
 			}
 		});
 		
-		t.cancel();
+
 	}
 	
 	public void generateIceFreezeStick(Player player, FreezeStick stick)
@@ -384,7 +384,7 @@ public class EventManager implements Listener {
 	
 	public void destroyIce(int time, Block block)
 	{
-		BukkitTask t = Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+		Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
 			
 			@Override
 			public void run()  
@@ -395,13 +395,13 @@ public class EventManager implements Listener {
 			
 		}, time);
 		
-		t.cancel();
+
 	}
 	
 	
 	public void substractFreezeStickDurability(int time, FreezeStick stick, Player pl) {
 
-		BukkitTask t = Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+	Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
 
 			@Override
 			public void run() {
@@ -429,7 +429,7 @@ public class EventManager implements Listener {
 				}
 			}
 		});
-		t.cancel();
+
 	}
 
 }
