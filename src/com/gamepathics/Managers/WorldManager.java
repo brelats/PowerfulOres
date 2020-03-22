@@ -165,7 +165,7 @@ public class WorldManager implements Listener {
 			Location spawnLoc = new Location(w, orePosX, 5, orePosZ);
 			oreCount++;
 
-			p.sendMessage(ore.getOreName() + " :LocX: " + orePosX + " :LocY: " + 5 + " :LocZ: " + orePosZ);
+			
 			ore.setLocation(spawnLoc);
 			oresGenerated.add(ore);
 			w.getBlockAt(spawnLoc).setType(ore.getOreMaterial());
@@ -277,7 +277,7 @@ public class WorldManager implements Listener {
 	}
 	
 	public void dontHavePerms(Player player) {
-		player.sendMessage(MessageManager.powerfulOresPrefix + MessageManager.dontHavePerms);
+		player.sendMessage(MessageManager.dontHavePerms);
 
 	}
 

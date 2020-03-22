@@ -9,12 +9,17 @@ public class MessageManager {
 	public static final String oreGived = " §3gived to ";
 	
 	//Errors
-	public static  String oreDoesNotExist = "This ore does not exist";
-	public static  String stickDoesNotExist = "This stick does not exist";
-
-	public static  String playerNotFound = "Player not found. Please check the inserted name.";
+	public static  String prefixOreDoesNotExist = "This ore does not exist";
+	public static  String oreDoesNotExist = powerfulOresPrefix + prefixOreDoesNotExist;
 	
-	public static  String dontHavePerms = "You don't have permission to do this.";
+	public static  String prefixStickDoesNotExist = "This stick does not exist";
+	public static String stickDoesNotExist = powerfulOresPrefix + prefixStickDoesNotExist;
+	
+	public static String prefixPlayerNotFound = "Player not found. Please check the inserted name.";
+	public static String playerNotFound = powerfulOresPrefix + prefixPlayerNotFound;
+	
+	public static  String prefixDontHavePerms = "You don't have permission to do this.";
+	public static  String dontHavePerms = powerfulOresPrefix + prefixDontHavePerms;
 
 	//Permissions
 	public static final String permHelpCommand = "powerfulores.commands";
@@ -23,6 +28,19 @@ public class MessageManager {
 	
 	public static final String permOreBreak = "powerfulores.ore.break";
 	public static final String permOrePlace = "powerfulores.ore.place";
+	
+	public static final String permCraftFreezeStick = "powerfulores.craft.freeze";
+	public static final String permCraftFireStick = "powerfulores.craft.fire";
+	public static final String permCraftLightningStick = "powerfulores.craft.lightning";
+	public static final String permCraftEnderStick = "powerfulores.craft.ender";
+	public static final String permCraftFlightStick = "powerfulores.craft.flight";
+	
+	public static final String permUseFreezeStick = "powerfulores.use.freeze";
+	public static final String permUseFireStick = "powerfulores.use.fire";
+	public static final String permUseLightningStick = "powerfulores.use.lightning";
+	public static final String permUseEnderStick = "powerfulores.use.ender";
+	public static final String permUseFlightStick = "powerfulores.use.flight";
+	
 
 	
 	
@@ -75,16 +93,22 @@ public class MessageManager {
 	// FlightStick
 	public static  String flightStickName = "§8Flight Stick";
 	public static  String flightStickLore = "[RightClick] Feel the power of the Wind God!";
-	public static  String flightStickEnabled = powerfulOresPrefix + "Flight Enabled";
-	public static  String flightStickDisabled = powerfulOresPrefix + "§cFlight Disabled";
+	
+	public static String prefixFlightStickEnabled = "Flight Enabled";
+	public static  String flightStickEnabled = powerfulOresPrefix + prefixFlightStickEnabled;
+	
+	public static String prefixFlightStickDisabled = "§cFlight Disabled";
+	public static String flightStickDisabled = powerfulOresPrefix + prefixFlightStickDisabled;
 
 	// FreezeStick
 	public static  String freezeStickName = "§9Freeze Stick";
 	public static  String freezeStickLore = "[RightClick] Feel the power of the Ice God!";
 	
+	public static  String prefixFreezeStickEnabled = "Freeze Enabled";
+	public static  String freezeStickEnabled = powerfulOresPrefix + prefixFreezeStickEnabled;
 	
-	public static  String freezeStickEnabled = powerfulOresPrefix + "Freeze Enabled";
-	public static  String freezeStickDisabled =  powerfulOresPrefix + "§cFreeze Disabled";
+	public static  String prefixFreezeStickDisabled = "§cFreeze Disabled";
+	public static  String freezeStickDisabled =  powerfulOresPrefix + prefixFreezeStickDisabled;
 
 
 

@@ -144,11 +144,12 @@ public class EventManager implements Listener {
 
 /* Lightning */ 		if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
 							.equals(MessageManager.lightningStickName)) {
+						if(pl.hasPermission(MessageManager.permUseLightningStick)) {
 
 						if (lightningSticks.get(pl) == null) {
 							lightningSticks.put(pl, new LightningStick());
 
-						} else {
+						} 
 							if (lightningSticks.get(pl).durability > 0) {
 								pl.getWorld().strikeLightning(
 										pl.getTargetBlock((Set<Material>) null, lightningScope).getLocation());
@@ -160,14 +161,20 @@ public class EventManager implements Listener {
 								pl.getInventory().getItemInMainHand().setAmount(0);
 								lightningSticks.remove(pl);
 								}
+						
 						}
-
+						else 
+						{
+							pl.sendMessage(MessageManager.dontHavePerms);
+						}
 /* Fire */				} else if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
 								.equals(MessageManager.fireStickName)) {
+						if(pl.hasPermission(MessageManager.permUseFireStick)) {
+							
 						if (fireSticks.get(pl) == null) {
 							fireSticks.put(pl, new FireStick());
 
-						} else {
+						} 
 							if (fireSticks.get(pl).durability > 0) {
 
 								pl.spawnParticle(Particle.FLAME, pl.getLocation(), 10);
@@ -183,12 +190,17 @@ public class EventManager implements Listener {
 								pl.getInventory().getItemInMainHand().setAmount(0);
 								fireSticks.remove(pl);
 								}
-						}
+						
 
-					
+						}
+						else 
+						{
+							pl.sendMessage(MessageManager.dontHavePerms);
+						}
 
 /* Freeze */ 			} else if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
 								.equals(MessageManager.freezeStickName)) {
+						if(pl.hasPermission(MessageManager.permUseFreezeStick)) {
 						if (freezeSticks.get(pl) == null) {
 							freezeSticks.put(pl, new FreezeStick());
 						}
@@ -211,10 +223,15 @@ public class EventManager implements Listener {
 								pl.getInventory().getItemInMainHand().setAmount(0);
 								freezeSticks.remove(pl);
 								}
-						
+						}
+						else 
+						{
+							pl.sendMessage(MessageManager.dontHavePerms);
+						}
 
 /* Ender */ 			} else if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
 								.equals(MessageManager.enderStickName)) {
+						if(pl.hasPermission(MessageManager.permUseEnderStick)) {
 						if (enderSticks.get(pl) == null) {
 							enderSticks.put(pl, new EnderStick());
 						} else {
@@ -230,11 +247,15 @@ public class EventManager implements Listener {
 							enderSticks.remove(pl);
 							}
 						}
+						}
+						else 
+						{
+							pl.sendMessage(MessageManager.dontHavePerms);
+						}
 /* Flight */			} else if (pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
 							.equals(MessageManager.flightStickName)) {
-	
-	
-						pl.spawnParticle(Particle.CLOUD, pl.getLocation(), 10);
+						if(pl.hasPermission(MessageManager.permUseFlightStick)) {
+						
 						if (flightSticks.get(pl) == null) {
 							flightSticks.put(pl, new FlightStick());
 							
@@ -247,7 +268,7 @@ public class EventManager implements Listener {
 								if (flightSticks.get(pl).canFlight) {
 									pl.sendMessage(MessageManager.flightStickEnabled);
 									substractFlightStickDurability(flightDurabilityTime, flightSticks.get(pl), pl);
-
+									pl.spawnParticle(Particle.CLOUD, pl.getLocation(), 10);
 
 								} else {
 									pl.sendMessage(MessageManager.flightStickDisabled);
@@ -263,10 +284,14 @@ public class EventManager implements Listener {
 						flightSticks.remove(pl);
 						}
 					
+					} 
+					else 
+					{
+						pl.sendMessage(MessageManager.dontHavePerms);
 					}
 					}
 			}
-
+			}
 		}
 	}
 
@@ -277,11 +302,26 @@ public class EventManager implements Listener {
 		ItemStack[] items = inventory.getMatrix();
 		Player player = (Player) event.getView().getPlayer();
 
-		checkCraftStick(event, items, MessageManager.lightningFragmentName, player);
-		checkCraftStick(event, items, MessageManager.fireFragmentName, player);
-		checkCraftStick(event, items, MessageManager.flightFragmentName, player);
-		checkCraftStick(event, items, MessageManager.freezeFragmentName, player);
-		checkCraftStick(event, items, MessageManager.enderFragmentName, player);
+		if(pl.hasPermission(MessageManager.permCraftLightningStick))
+		{
+			checkCraftStick(event, items, MessageManager.lightningFragmentName, player);
+		}
+		if(pl.hasPermission(MessageManager.permCraftFireStick))
+		{
+			checkCraftStick(event, items, MessageManager.fireFragmentName, player);
+		}
+		if(pl.hasPermission(MessageManager.permCraftFlightStick))
+		{
+			checkCraftStick(event, items, MessageManager.flightFragmentName, player);
+		}
+		if(pl.hasPermission(MessageManager.permCraftFreezeStick))
+		{
+			checkCraftStick(event, items, MessageManager.freezeFragmentName, player);
+		}
+		if(pl.hasPermission(MessageManager.permCraftEnderStick))
+		{
+			checkCraftStick(event, items, MessageManager.enderFragmentName, player);
+		}
 
 	}
 

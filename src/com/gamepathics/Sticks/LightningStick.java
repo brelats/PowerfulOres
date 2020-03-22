@@ -43,6 +43,7 @@ public class LightningStick implements IStick{
 		stickMeta.addEnchant(Main.stickEnchantment, 1, true);
 		stickItem.setItemMeta(stickMeta);
 		
+		
 	}
 	@Override
 	public ItemMeta substractDurability(int k) {
@@ -107,7 +108,6 @@ public class LightningStick implements IStick{
 
 	@Override
 	public void setPlayer(Player pl) {
-		// TODO Auto-generated method stub
 		
 	}
 
